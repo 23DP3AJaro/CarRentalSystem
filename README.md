@@ -13,7 +13,11 @@ Sakums > Statistika >
    Ievadiet poziciju: )
 # Funkciju apraksti
 Mašīnas pievienošana/dzēšana - sistēmas administrators var pievienot vai izdzēst pieejamas mašīnas.
+
 Mašīnas rediģēšana - sistēmas administrators var rediģēt mašīnas pieejamību izirēšanai un citu informāciju.
+
 Mašīnas filtrēšana - sistēmas lietotājs var atlasīt tabulu ar mašīnam pec kriterijam (piem. nobraukums >1000km)
+
 Mašīnas kārtošana - sistēmas lietotājs var atlasīt tabulu ar mašīnam ar sakārtotam pozicijam (piem. mašīnas ar mazāku nobraukumu pirmie).
+
 Statistikas rīki - sistēmas lietotājs var atlasīt statistīku (piem. kopēja peļņa, vidēja peļņa no mašīnas utt.)
