@@ -5,9 +5,9 @@ public class Klienti {
     
     private String name;
     private String surname;
-    private int birth_date;
+    private String birth_date;
 
-    public Klienti (String name, String surname, int birth_date){
+    public Klienti (String name, String surname, String birth_date){
         this.name = name;
         this.surname = surname;
         this.birth_date = birth_date;
@@ -21,7 +21,7 @@ public class Klienti {
         return surname;
     }
 
-    public int getBirthDate() {
+    public String getBirthDate() {
         return birth_date;
     }
 

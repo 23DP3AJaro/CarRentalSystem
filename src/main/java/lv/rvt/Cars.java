@@ -7,14 +7,15 @@ public class Cars {
     private String color;
     private int mileage;
     private String license_plate;
+    private int rental_price;
 
-    public Cars (String brand, String model, String color, String license_plate, int mileage){
+    public Cars (String brand, String model, String color, String license_plate, int mileage, int rental_price){
         this.brand = brand;
         this.model = model;
         this.license_plate = license_plate;
         this.color = color;
         this.mileage = mileage;
-
+        this.rental_price = rental_price;
     }
 
     public String getBrand() {
@@ -37,5 +38,8 @@ public class Cars {
         return mileage;
     }
 
+    public int getRentalPrice(){
+        return rental_price;
+    }
 
 }
