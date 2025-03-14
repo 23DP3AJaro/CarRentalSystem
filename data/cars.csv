@@ -1,7 +1,2 @@
-brand, model, color, license_plate, mileage, rental_price
-Volkswagen, Golf, white, ABC-1234, 2000, 50
-Volkswagen, Golf, black, DEF-5678, 2000, 60
-Volkswagen, Golf, red, GHI-9101, 2000, 70
-Volkswagen, Passat, white, JKL-1121, 4000, 80
-Volkswagen, Passat, black, MNO-3141, 4000, 90
-Volkswagen, Passat, red, PQR-5161, 4000, 100
+brand, model, year_of_manufacture, color, license_plate, mileage, rental_price
+
