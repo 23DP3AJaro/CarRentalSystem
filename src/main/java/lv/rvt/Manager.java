@@ -19,7 +19,7 @@ public class Manager {
     private static void addCar(Cars car) throws Exception{
         BufferedWriter writer = Helper.getWriter("cars.csv", StandardOpenOption.APPEND);
 
-        writer.write(car.getBrand() + ", " + car.getModel() + ", " +car.getColor() +", " + car.getLicensePlate() + ", " + car.getMileage() + ", " + car.getRentalPrice()); 
+        writer.write(car.getBrand() + ", " + car.getModel() + ", "  + car.getYearOfManufacture() + ", "+ car.getColor() +", " + car.getLicensePlate() + ", " + car.getMileage() + ", " + car.getRentalPrice()); 
         writer.newLine();
         writer.close();
     }
@@ -34,7 +34,7 @@ public class Manager {
         System.out.println("Surname: ");
         String inputSurname = scanner.nextLine();
 
-        System.out.println("Birth date: ");
+        System.out.println("Birth date: "); 
         String inputBirthDate = scanner.nextLine();
         
         Klienti klients = new Klienti(inputName, inputSurname, inputBirthDate);
@@ -51,6 +51,9 @@ public class Manager {
         System.out.println("Model: ");
         String inputModel = scanner.nextLine();
 
+        System.out.println("Year of manufacture: ");
+        int inputYearOfManufacture = Integer.parseInt(scanner.nextLine());
+
         System.out.println("Color: ");
         String inputColor = scanner.nextLine();
 
@@ -58,12 +61,12 @@ public class Manager {
         String inputLicensePlate = scanner.nextLine();
 
         System.out.println("Mileage: ");
-        int inputMileage = scanner.nextInt();
+        int inputMileage = Integer.parseInt(scanner.nextLine());
 
         System.out.println("Rental price: ");
-        int inputRentalPrice = scanner.nextInt();
-        
-        Cars car = new Cars(inputBrand, inputModel, inputColor, inputLicensePlate, inputMileage, inputRentalPrice);
+        int inputRentalPrice = Integer.parseInt(scanner.nextLine());
+
+        Cars car = new Cars(inputBrand, inputModel, inputYearOfManufacture, inputColor, inputLicensePlate, inputMileage, inputRentalPrice);
 
         addCar(car);
     }

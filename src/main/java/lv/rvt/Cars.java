@@ -7,15 +7,19 @@ public class Cars {
     private String color;
     private int mileage;
     private String license_plate;
+    private int year_of_manufacture;
     private int rental_price;
+    private boolean isAvailable;
 
-    public Cars (String brand, String model, String color, String license_plate, int mileage, int rental_price){
+    public Cars (String brand, String model, int year_of_manufacture, String color, String license_plate, int mileage, int rental_price){
         this.brand = brand;
         this.model = model;
         this.license_plate = license_plate;
         this.color = color;
         this.mileage = mileage;
         this.rental_price = rental_price;
+        this.year_of_manufacture = year_of_manufacture;
+        isAvailable = true;
     }
 
     public String getBrand() {
@@ -40,6 +44,14 @@ public class Cars {
 
     public int getRentalPrice(){
         return rental_price;
+    }
+
+    public boolean isAvailable(){
+        return isAvailable;
+    }
+
+    public int getYearOfManufacture(){
+        return year_of_manufacture;
     }
 
 }
