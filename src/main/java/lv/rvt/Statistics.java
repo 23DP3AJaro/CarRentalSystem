@@ -6,6 +6,9 @@ import lv.rvt.tools.Helper;
 
 public class Statistics {
     public static void AverageMilleage() throws Exception {
+        final String ANSI_RESET = "\u001B[0m"; 
+        final String ANSI_GREEN = "\u001B[32m"; 
+
         BufferedReader reader = Helper.getReader("cars.csv");
         String line;
         reader.readLine();
@@ -16,13 +19,13 @@ public class Statistics {
         while ((line = reader.readLine()) != null) {
             String[] parts = line.split(", ");
             
-            sum = sum + Integer.parseInt(parts[4]);
+            sum = sum + Integer.parseInt(parts[5]);
             count++;
             }
             
 
         reader.close();
 
-        System.out.println("Average milleage: " + sum / count);
+        System.out.println(ANSI_GREEN + "Vidējais nobraukums: " + ANSI_RESET + sum / count);
         }
     };

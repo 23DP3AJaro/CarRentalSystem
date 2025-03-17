@@ -1,0 +1,49 @@
+package lv.rvt;
+import java.util.Scanner;
+
+public class UImethods {
+    
+
+    public static void ChangePositionStatistics() throws Exception{
+            final String ANSI_RED = "\u001B[31m";
+            final String ANSI_RESET = "\u001B[0m";
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.print("Ievadiet poziciju: ");
+
+            String position = scanner.nextLine();
+
+            if (position.equals("1")) {
+                Statistics.AverageMilleage();
+                ChangePositionStatistics();
+            } else if (position.equals("2")) {
+                
+            } else if (position.equals("3")) {
+                
+            } else if (position.equals("4")) {
+                UI.MainMenu();
+            } else  {
+                System.out.println(ANSI_RED + "Nav tādu poziciju!" + ANSI_RESET);
+                ChangePositionStatistics();
+            }
+        };
+
+    public static void ChangePositionMainMenu() throws Exception{
+            final String ANSI_RED = "\u001B[31m";
+            final String ANSI_RESET = "\u001B[0m";
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.print("Ievadiet poziciju: ");
+
+            String position = scanner.nextLine();
+
+            if (position.equals("1")) {
+                
+            } else if (position.equals("2")) {
+                UI.ShowStatistics();
+            } else {
+                System.out.println(ANSI_RED + "Nav tādu poziciju!" + ANSI_RESET);
+                ChangePositionMainMenu();
+            }
+    }
+}
