@@ -1,2 +1,1 @@
-brand, model, year_of_manufacture, color, license_plate, mileage, rental_price
-
+id, brand, model, year_of_manufacture, color, license_plate, mileage, rental_price

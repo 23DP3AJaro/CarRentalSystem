@@ -11,7 +11,7 @@ public class Manager {
         BufferedWriter writer = Helper.getWriter("klienti.csv", StandardOpenOption.APPEND);
 
 
-        writer.write(klients.getName() + ", " + klients.getSurname() + ", " + klients.getBirthDate()); 
+        writer.write(klients.getId() + ", " + klients.getName() + ", " + klients.getSurname() + ", " + klients.getBirthDate()); 
         writer.newLine();
         writer.close();
     }
@@ -19,7 +19,7 @@ public class Manager {
     private static void addCar(Cars car) throws Exception{
         BufferedWriter writer = Helper.getWriter("cars.csv", StandardOpenOption.APPEND);
 
-        writer.write(car.getBrand() + ", " + car.getModel() + ", "  + car.getYearOfManufacture() + ", "+ car.getColor() +", " + car.getLicensePlate() + ", " + car.getMileage() + ", " + car.getRentalPrice()); 
+        writer.write(car.getId() + ", " + car.getBrand() + ", " + car.getModel() + ", "  + car.getYearOfManufacture() + ", "+ car.getColor() +", " + car.getLicensePlate() + ", " + car.getMileage() + ", " + car.getRentalPrice()); 
         writer.newLine();
         writer.close();
     }
