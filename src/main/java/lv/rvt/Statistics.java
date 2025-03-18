@@ -13,8 +13,8 @@ public class Statistics {
         String line;
         reader.readLine();
 
-        int sum = 0;
-        int count = 0;
+        Integer sum = 0;
+        Integer count = 0;
         
         while ((line = reader.readLine()) != null) {
             String[] parts = line.split(", ");
@@ -25,7 +25,12 @@ public class Statistics {
             
 
         reader.close();
-
-        System.out.println(ANSI_GREEN + "Vidējais nobraukums: " + ANSI_RESET + sum / count);
+        
+        if (count.equals(0)) {
+            System.out.println(ANSI_GREEN + "Nav datu" + ANSI_RESET);
+        } else {
+            System.out.println(ANSI_GREEN + "Vidējais nobraukums: " + ANSI_RESET + sum / count);
+        }
+        
         }
     };
