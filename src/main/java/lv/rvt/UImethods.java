@@ -26,7 +26,7 @@ public class UImethods {
             } else if (position.equals("4")) {
                 UI.MainMenu();
             } else  {
-                System.out.println(ANSI_RED + "Nav tādu poziciju!" + ANSI_RESET);
+                UI.ShowStatisticsIncorrectPosition();
                 ChangePositionStatistics();
             }
         };
@@ -45,7 +45,7 @@ public class UImethods {
             } else if (position.equals("2")) {
                 UI.ShowStatistics();
             } else {
-                System.out.println(ANSI_RED + "Nav tādu poziciju!" + ANSI_RESET);
+                UI.MainMenuIncorrectPosition();
                 ChangePositionMainMenu();
             }
     }
@@ -61,17 +61,19 @@ public class UImethods {
             String position = scanner.nextLine();
 
             if (position.equals("1")) {
+                
+            } else if (position.equals("2")) {
                 Manager.userAddCars();
                 System.out.println("\n" + ANSI_GREEN + "Mašīna pievienota!" + ANSI_RESET);
                 UI.ShowCarControl();
-            } else if (position.equals("2")) {
-                
             } else if (position.equals("3")) {
                 
             } else if (position.equals("4")) {
+                
+            } else if (position.equals("5")) {
                 UI.MainMenu();
             } else {
-                System.out.println(ANSI_RED + "Nav tādu poziciju!" + ANSI_RESET);
+                UI.ShowCarControlIncorrectPosition();
                 ChangePositionCarControl();
             }
     }
