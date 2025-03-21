@@ -76,8 +76,18 @@ public class Manager {
         System.out.println("Model: ");
         String inputModel = scanner.nextLine();
 
-        System.out.println("Year of manufacture: ");
-        int inputYearOfManufacture = Integer.parseInt(scanner.nextLine());
+        int inputYearOfManufacture;
+        while (true) {
+            System.out.println("Year of manufacture: ");
+            try {
+                inputYearOfManufacture = Integer.parseInt(scanner.nextLine());
+                break;
+                
+                
+            } catch(NumberFormatException e){
+                System.out.println("Invalid input. Enter a number.");
+            }
+        }
 
         System.out.println("Color: ");
         String inputColor = scanner.nextLine();
@@ -85,11 +95,35 @@ public class Manager {
         System.out.println("License plate: ");
         String inputLicensePlate = scanner.nextLine();
 
-        System.out.println("Mileage: ");
-        int inputMileage = Integer.parseInt(scanner.nextLine());
+        int inputMileage;
+        while (true) {
+            System.out.println("Mileage: ");
+            try {
+                inputMileage = Integer.parseInt(scanner.nextLine());
+                if (inputMileage >= 0) {
+                    break;
+                } else {
+                    System.out.println("Invalid mileage. Must be a positive number.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Enter a number.");
+            }
+        }
 
-        System.out.println("Rental price: ");
-        int inputRentalPrice = Integer.parseInt(scanner.nextLine());
+        int inputRentalPrice;
+        while (true) {
+            System.out.println("Rental price: ");
+            try {
+                inputRentalPrice = Integer.parseInt(scanner.nextLine());
+                if (inputRentalPrice >= 0) {
+                    break;
+                } else {
+                    System.out.println("Invalid rental price. Must be a positive number.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Enter a number.");
+            }
+        }
 
         Cars car = new Cars(inputBrand, inputModel, inputYearOfManufacture, inputColor, inputLicensePlate, inputMileage, inputRentalPrice);
 
