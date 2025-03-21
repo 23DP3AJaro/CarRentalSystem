@@ -5,6 +5,13 @@ public class UI {
     public static final String ANSI_RESET = "\u001B[0m";
 
     public static void MainMenu() throws Exception{
+        System.out.println("______      _          ______           _                     _______");
+        System.out.println("|  _  \\    (_)         | ___ \\         | |                   //  ||\\ \\");
+        System.out.println("| | | |_ __ ___   _____| |_/ /___ _ __ | |_            _____//___||_\\ \\___");
+        System.out.println("| | | | '__| \\ \\ / / _ \\    // _ \\ '_ \\| __|           )  _          _    \\");
+        System.out.println("| |/ /| |  | |\\ V /  __/ |\\ \\  __/ | | | |_            |_/ \\________/ \\___|");
+        System.out.println("|___/ |_|  |_| \\_/ \\___\\_| \\_\\___|_| |_|\\__|          ___\\_/________\\_/______");
+        System.out.println();
         System.out.println("\n" + ANSI_YELLOW + "Sakums -> \n" + ANSI_RESET);
         System.out.println("1. Mašīnu pārvaldība");
         System.out.println("2. Statistika");
