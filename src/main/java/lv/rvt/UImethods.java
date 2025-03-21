@@ -9,7 +9,7 @@ public class UImethods {
             final String ANSI_RESET = "\u001B[0m";
             Scanner scanner = new Scanner(System.in);
 
-            System.out.print("Ievadiet poziciju: ");
+            System.out.print("\nIevadiet poziciju: ");
 
             String position = scanner.nextLine();
 
@@ -33,17 +33,43 @@ public class UImethods {
             final String ANSI_RESET = "\u001B[0m";
             Scanner scanner = new Scanner(System.in);
 
-            System.out.print("Ievadiet poziciju: ");
+            System.out.print("\nIevadiet poziciju: ");
 
             String position = scanner.nextLine();
 
             if (position.equals("1")) {
-                
+                UI.ShowCarControl();
             } else if (position.equals("2")) {
                 UI.ShowStatistics();
             } else {
                 System.out.println(ANSI_RED + "Nav tādu poziciju!" + ANSI_RESET);
                 ChangePositionMainMenu();
+            }
+    }
+
+    public static void ChangePositionCarControl() throws Exception{
+            final String ANSI_RED = "\u001B[31m";
+            final String ANSI_GREEN = "\u001B[32m";
+            final String ANSI_RESET = "\u001B[0m";
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.print("\nIevadiet poziciju: ");
+
+            String position = scanner.nextLine();
+
+            if (position.equals("1")) {
+                Manager.userAddCars();
+                System.out.println("\n" + ANSI_GREEN + "Mašīna pievienota!" + ANSI_RESET);
+                UI.ShowCarControl();
+            } else if (position.equals("2")) {
+                
+            } else if (position.equals("3")) {
+                
+            } else if (position.equals("4")) {
+                UI.MainMenu();
+            } else {
+                System.out.println(ANSI_RED + "Nav tādu poziciju!" + ANSI_RESET);
+                ChangePositionCarControl();
             }
     }
 }
