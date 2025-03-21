@@ -5,6 +5,7 @@ public class UI {
     public static final String ANSI_RESET = "\u001B[0m";
 
     public static void MainMenu() throws Exception{
+        UImethods.clearScreen();
         System.out.println("______      _          ______           _                     _______");
         System.out.println("|  _  \\    (_)         | ___ \\         | |                   //  ||\\ \\");
         System.out.println("| | | |_ __ ___   _____| |_/ /___ _ __ | |_            _____//___||_\\ \\___");
@@ -20,7 +21,7 @@ public class UI {
 
     public static void ShowStatistics() throws Exception{
         
-
+        UImethods.clearScreen();
         System.out.println("\n" + ANSI_YELLOW + "Sakums -> Statistika -> \n" + ANSI_RESET);
         System.out.println("1. Vidējais nobraukums");
         System.out.println("2. Kopēja peļņa");
@@ -31,6 +32,7 @@ public class UI {
     }
 
     public static void ShowCarControl() throws Exception{
+        UImethods.clearScreen();
         System.out.println("\n" + ANSI_YELLOW + "Sakums -> Mašīnu pārvaldība -> \n" + ANSI_RESET);
         System.out.println("1. Pievienot mašīnu");
         System.out.println("2. Izdzēst mašīnu");

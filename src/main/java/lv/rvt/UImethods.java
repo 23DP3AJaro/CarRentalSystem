@@ -2,7 +2,10 @@ package lv.rvt;
 import java.util.Scanner;
 
 public class UImethods {
-    
+    public static void clearScreen() {  
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
+    } 
 
     public static void ChangePositionStatistics() throws Exception{
             final String ANSI_RED = "\u001B[31m";
