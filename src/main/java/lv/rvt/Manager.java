@@ -1,11 +1,36 @@
 package lv.rvt;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
 import lv.rvt.tools.Helper;
-
 public class Manager {
+
+    public static int getLastIdFromCsv(String filename) throws Exception {
+        
+        BufferedReader reader = Helper.getReader(filename);
+        String line;
+        int lastId = 0;
+
+        reader.readLine();
+
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(",");
+            if (parts.length > 0) { 
+                int currentId = Integer.parseInt(parts[0].trim()); 
+                if (currentId > lastId) {
+                    lastId = currentId;
+                }
+            }
+        }
+
+        return lastId;
+    }
+
     
     private static void addKlients(Klienti klients) throws Exception{
         BufferedWriter writer = Helper.getWriter("klienti.csv", StandardOpenOption.APPEND);

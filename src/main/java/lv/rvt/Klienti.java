@@ -3,13 +3,12 @@ package lv.rvt;
 
 public class Klienti {
     private int Klients_ID;
-    private static int nextId = 1;
     private String name;
     private String surname;
     private String birth_date;
 
-    public Klienti (String name, String surname, String birth_date){
-        this.Klients_ID = nextId++;
+    public Klienti (String name, String surname, String birth_date) throws Exception{
+        this.Klients_ID = Manager.getLastIdFromCsv("klienti.csv") + 1;
         this.name = name;
         this.surname = surname;
         this.birth_date = birth_date;

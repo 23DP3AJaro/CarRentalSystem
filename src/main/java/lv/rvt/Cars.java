@@ -2,7 +2,6 @@ package lv.rvt;
 
 public class Cars {
     private int Car_ID;
-    private static int nextId = 1;
     private String brand;
     private String model;
     private String color;
@@ -12,8 +11,9 @@ public class Cars {
     private int rental_price;
     private boolean isAvailable;
 
-    public Cars (String brand, String model, int year_of_manufacture, String color, String license_plate, int mileage, int rental_price){
-        this.Car_ID = nextId++;
+    public Cars (String brand, String model, int year_of_manufacture, String color, String license_plate, int mileage, int rental_price) throws Exception{
+        
+        this.Car_ID = Manager.getLastIdFromCsv("cars.csv") + 1;	
         this.brand = brand;
         this.model = model;
         this.license_plate = license_plate;
@@ -21,7 +21,7 @@ public class Cars {
         this.mileage = mileage;
         this.rental_price = rental_price;
         this.year_of_manufacture = year_of_manufacture;
-        isAvailable = true;
+        this.isAvailable = true;
     }
 
     public int getId() {
