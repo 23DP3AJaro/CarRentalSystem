@@ -1,5 +1,8 @@
 package lv.rvt;
+import java.io.BufferedReader;
 import java.util.Scanner;
+
+import lv.rvt.tools.Helper;
 
 public class UImethods {
     public static void clearScreen() {  
@@ -61,6 +64,7 @@ public class UImethods {
             String position = scanner.nextLine();
 
             if (position.equals("1")) {
+                UI.PrintCarsTable();
                 
             } else if (position.equals("2")) {
                 Manager.userAddCars();
@@ -77,4 +81,24 @@ public class UImethods {
                 ChangePositionCarControl();
             }
     }
+
+    public static void ChangePositionCarTable() throws Exception{
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("\nIevadiet poziciju: ");
+        String position = scanner.nextLine();
+        if (position.equals("1")) {
+            
+        } else if (position.equals("2")) {
+            
+        } else  if (position.equals("3")){
+            UI.ShowCarControl();
+            ChangePositionCarControl();
+        } else {
+            UI.PrintCarsTableIncorrectPosition();
+            ChangePositionMainMenu();
+        }
+    }
+
+    
 }

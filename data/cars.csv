@@ -1,1 +1,6 @@
 id, brand, model, year_of_manufacture, color, license_plate, mileage, rental_price
+1, Toyota, Corolla, 2018, Red, ABC123, 35000, 45.99
+2, Honda, Civic, 2020, Blue, XYZ789, 22000, 50.99
+3, Ford, Focus, 2019, Black, LMN456, 30000, 48.99
+4, Chevrolet, Malibu, 2017, White, DEF321, 40000, 44.99
+5, Nissan, Sentra, 2021, Gray, GHI654, 15000, 52.99
