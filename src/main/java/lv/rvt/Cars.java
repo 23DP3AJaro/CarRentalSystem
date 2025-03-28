@@ -8,10 +8,10 @@ public class Cars {
     private int mileage;
     private String license_plate;
     private int year_of_manufacture;
-    private int rental_price;
+    private double rental_price;
     private boolean isAvailable;
 
-    public Cars (String brand, String model, int year_of_manufacture, String color, String license_plate, int mileage, int rental_price) throws Exception{
+    public Cars (String brand, String model, int year_of_manufacture, String color, String license_plate, int mileage, double rental_price) throws Exception{
         
         this.Car_ID = Manager.getLastIdFromCsv("cars.csv") + 1;	
         this.brand = brand;
@@ -48,7 +48,7 @@ public class Cars {
         return mileage;
     }
 
-    public int getRentalPrice(){
+    public double getRentalPrice(){
         return rental_price;
     }
 

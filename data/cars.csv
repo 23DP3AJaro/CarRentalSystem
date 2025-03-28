@@ -1,1 +1,2 @@
-id, brand, model, year_of_manufacture, color, license_plate, mileage, rental_price
+id, brand, model, year_of_manufacture, color, license_plate, mileage, rental_price, available
+2, Brand, Model, 21923, color, license plate, 123, 123, false
