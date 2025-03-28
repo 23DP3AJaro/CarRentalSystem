@@ -20,7 +20,9 @@ public class UI {
         System.out.println();
         System.out.println("\n" + ANSI_YELLOW + "Sakums -> \n" + ANSI_RESET);
         System.out.println("1. Mašīnu pārvaldība");
-        System.out.println("2. Statistika");
+        System.out.println("2. Klientu pārvaldība");
+        System.out.println("3. Nomas pārvaldība");
+        System.out.println("4. Statistika");
         UImethods.ChangePositionMainMenu();
     }
 
@@ -35,7 +37,9 @@ public class UI {
         System.out.println();
         System.out.println("\n" + ANSI_YELLOW + "Sakums -> \n" + ANSI_RESET);
         System.out.println("1. Mašīnu pārvaldība");
-        System.out.println("2. Statistika");
+        System.out.println("2. Klientu pārvaldība");
+        System.out.println("3. Nomas pārvaldība");
+        System.out.println("4. Statistika");
 
         System.out.println(ANSI_RED + "Nav tādu poziciju!" + ANSI_RESET);
         UImethods.ChangePositionMainMenu();
@@ -89,6 +93,56 @@ public class UI {
 
         System.out.println(ANSI_RED + "Nav tādu poziciju!" + ANSI_RESET);
         UImethods.ChangePositionCarControl();
+    }
+
+    public static void ShowClientControl() throws Exception {
+        UImethods.clearScreen();
+        System.out.println("\n" + ANSI_YELLOW + "Sakums -> Klientu pārvaldība -> \n" + ANSI_RESET);
+        System.out.println("1. Klientu saraksts");
+        System.out.println("2. Pievienot klientu");
+        System.out.println("3. Izdzēst klientu");
+        System.out.println("4. Rediģēt klientu");
+        System.out.println("5. Atpakaļ");
+
+        UImethods.ChangePositionClientControl();
+    }
+
+    public static void ShowClientControlIncorrectPosition() throws Exception {
+        UImethods.clearScreen();
+        System.out.println("\n" + ANSI_YELLOW + "Sakums -> Klientu pārvaldība -> \n" + ANSI_RESET);
+        System.out.println("1. Klientu saraksts");
+        System.out.println("2. Pievienot klientu");
+        System.out.println("3. Izdzēst klientu");
+        System.out.println("4. Rediģēt klientu");
+        System.out.println("5. Atpakaļ");
+
+        System.out.println(ANSI_RED + "Nav tādu poziciju!" + ANSI_RESET);
+        UImethods.ChangePositionClientControl();
+    }
+
+    public static void ShowRentControl() throws Exception {
+        UImethods.clearScreen();
+        System.out.println("\n" + ANSI_YELLOW + "Sakums -> Nomas pārvaldība -> \n" + ANSI_RESET);
+        System.out.println("1. Nomas vēsture");
+        System.out.println("2. Pievienot nomu");
+        System.out.println("3. Izdzēst nomu");
+        System.out.println("4. Rediģēt nomu");
+        System.out.println("5. Atpakaļ");
+
+        UImethods.ChangePositionRent();
+    }
+
+    public static void ShowRentControlIncorrectPosition() throws Exception {
+        UImethods.clearScreen();
+        System.out.println("\n" + ANSI_YELLOW + "Sakums -> Nomas pārvaldība -> \n" + ANSI_RESET);
+        System.out.println("1. Nomas vēsture");
+        System.out.println("2. Pievienot nomu");
+        System.out.println("3. Izdzēst nomu");
+        System.out.println("4. Rediģēt nomu");
+        System.out.println("5. Atpakaļ");
+
+        System.out.println(ANSI_RED + "Nav tādu poziciju!" + ANSI_RESET);
+        UImethods.ChangePositionRent();
     }
 
     public static void PrintCarsTable() throws Exception {

@@ -46,6 +46,10 @@ public class UImethods {
             if (position.equals("1")) {
                 UI.ShowCarControl();
             } else if (position.equals("2")) {
+                UI.ShowClientControl();
+            } else if (position.equals("3")) {
+                UI.ShowRentControl();
+            } else if (position.equals("4")) {
                 UI.ShowStatistics();
             } else {
                 UI.MainMenuIncorrectPosition();
@@ -80,6 +84,57 @@ public class UImethods {
                 UI.ShowCarControlIncorrectPosition();
                 ChangePositionCarControl();
             }
+    }
+
+    public static void ChangePositionClientControl() throws Exception{
+        final String ANSI_RED = "\u001B[31m";
+        final String ANSI_GREEN = "\u001B[32m";
+        final String ANSI_RESET = "\u001B[0m";
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("\nIevadiet poziciju: ");
+
+        String position = scanner.nextLine();
+
+        if (position.equals("1")) {
+            
+        } else if (position.equals("2")) {
+            
+        } else if (position.equals("3")) {
+            
+        } else if (position.equals("4")) {
+            
+        } else if (position.equals("5")) {
+            UI.MainMenu();
+        } else {
+            UI.ShowClientControlIncorrectPosition();
+            ChangePositionClientControl();
+        }
+    }
+
+    public static void ChangePositionRent() throws Exception{
+        final String ANSI_RED = "\u001B[31m";
+        final String ANSI_RESET = "\u001B[0m";
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("\nIevadiet poziciju: ");
+
+        String position = scanner.nextLine();
+
+        if (position.equals("1")) {
+            
+        } else if (position.equals("2")) {
+            
+        } else if (position.equals("3")) {
+            
+        } else if (position.equals("4")) {
+            
+        } else if (position.equals("5")) {
+            UI.MainMenu();
+        } else {
+            UI.ShowRentControlIncorrectPosition();
+            ChangePositionRent();
+        }
     }
 
     public static void ChangePositionCarTable() throws Exception{
