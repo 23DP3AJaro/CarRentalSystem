@@ -233,4 +233,75 @@ public class UI {
         System.out.println(ANSI_RED + "Nav tādu poziciju!" + ANSI_RESET);
         UImethods.ChangePositionCarTable();
     }
+
+    public static void PrintPersonTable() throws Exception {
+        BufferedReader reader = Helper.getReader("klienti.csv");
+        String line;
+        final String ANSI_GREEN = "\u001B[32m";
+        final String ANSI_RESET = "\u001B[0m";
+
+        reader.readLine();
+        UImethods.clearScreen();
+
+        System.out.println(ANSI_GREEN);
+        System.out.printf("%-6s %-20s %-20s %-22s %-1s%n", "| ID", "| Vārds", "| Uzvārds", "| Tel. numurs", "|");
+        System.out.print(ANSI_RESET);
+
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(", ");
+
+            Integer id;
+            String name;
+            String surname;
+            String phone;
+            id = Integer.valueOf(parts[0]);
+            name = parts[1];
+            surname = parts[2];
+            phone = parts[3];
+
+            System.out.printf("%-6s %-20s %-20s %-22s %-1s%n", "| " + id, "| "+ name, "| " + surname, "| " + phone, "|");
+        }
+        System.out.println("\n" + "1. Atrast klientu");
+        System.out.println("2. Sakārtot");
+        System.out.println("3. Filtrēt");
+        System.out.println("4. Atpakaļ");
+
+        UImethods.ChangePositionPersonTable();
+    }
+
+    public static void PrintPersonTableIncorrectPosition() throws Exception {
+        BufferedReader reader = Helper.getReader("klienti.csv");
+        String line;
+        final String ANSI_GREEN = "\u001B[32m";
+        final String ANSI_RESET = "\u001B[0m";
+
+        reader.readLine();
+        UImethods.clearScreen();
+
+        System.out.println(ANSI_GREEN);
+        System.out.printf("%-6s %-20s %-20s %-22s %-1s%n", "| ID", "| Vārds", "| Uzvārds", "| Tel. numurs", "|");
+        System.out.print(ANSI_RESET);
+
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(", ");
+
+            Integer id;
+            String name;
+            String surname;
+            String phone;
+            id = Integer.valueOf(parts[0]);
+            name = parts[1];
+            surname = parts[2];
+            phone = parts[3];
+
+            System.out.printf("%-6s %-20s %-20s %-22s %-1s%n", "| " + id, "| "+ name, "| " + surname, "| " + phone, "|");
+        }
+        System.out.println("\n" + "1. Atrast klientu");
+        System.out.println("2. Sakārtot");
+        System.out.println("3. Filtrēt");
+        System.out.println("4. Atpakaļ");
+
+        System.out.println(ANSI_RED + "Nav tādu poziciju!" + ANSI_RESET);
+        UImethods.ChangePositionPersonTable();
+    }
 }
