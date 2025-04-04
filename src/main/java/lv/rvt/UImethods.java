@@ -144,10 +144,13 @@ public class UImethods {
         System.out.print("\nIevadiet poziciju: ");
         String position = scanner.nextLine();
         if (position.equals("1")) {
-
+            UI.PrintCarsTableSearch();
+            ChangePositionCarTable();
         } else if (position.equals("2")) {
 
         } else if (position.equals("3")) {
+
+        } else if (position.equals("4")) {
             UI.ShowCarControl();
             ChangePositionCarControl();
         } else {
@@ -162,7 +165,7 @@ public class UImethods {
         System.out.print("\nIevadiet poziciju: ");
         String position = scanner.nextLine();
         if (position.equals("1")) {
-
+            UI.PrintPersonTableSearch();
         } else if (position.equals("2")) {
 
         } else if (position.equals("3")) {
