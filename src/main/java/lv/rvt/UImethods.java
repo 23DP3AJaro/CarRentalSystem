@@ -2,7 +2,7 @@ package lv.rvt;
 
 import java.io.BufferedReader;
 import java.util.Scanner;
-
+import java.util.concurrent.TimeUnit;
 import lv.rvt.tools.Helper;
 
 public class UImethods {
@@ -76,9 +76,28 @@ public class UImethods {
             System.out.println("\n" + ANSI_GREEN + "Mašīna pievienota!" + ANSI_RESET);
             UI.ShowCarControl();
         } else if (position.equals("3")) {
+            System.out.println("\n" + "Ievadiet mašīnas ID, kuru vēlaties izdzēst: ");
+            int carId = Integer.valueOf(scanner.nextLine());
+            System.out.println("\nVai vēlaties izdzēst mašīnu ar ID " + carId + "? (y/n)");
+            String confirm = scanner.nextLine();
+            while (!confirm.equals("y" ) && !confirm.equals("n")) {
+                System.out.println("\nLūdzu ievadiet 'y' vai 'n': ");
+                confirm = scanner.nextLine();
+            }
 
+            if (confirm.equals("y")) {
+                Manager.deleteCar(carId);
+                System.out.println(ANSI_RED + "\nMašīna ar ID " + carId + " tiks izdzēsta." + ANSI_RESET);
+                TimeUnit.SECONDS.sleep(3);
+            } else {
+                
+            }
+            UI.ShowCarControl();
         } else if (position.equals("4")) {
-
+            System.out.println("\nIevadiet mašīnas ID, kuru vēlaties rediģēt: ");
+            int carId = Integer.valueOf(scanner.nextLine());
+            Manager.editCar(carId);
+            UI.ShowCarControl();
         } else if (position.equals("5")) {
             UI.MainMenu();
         } else {
