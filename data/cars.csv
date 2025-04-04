@@ -1,5 +1,5 @@
 id, brand, model, year_of_manufacture, color, license_plate, mileage, rental_price, available
 1, Toyota, Camry, 2020, Blue, ABC1234, 15000, 50.0, true
-2, Honda, Accord, 2019, Red, DEF5678, 20000, 55.0, false
+2, Honda, Accord, 2019, Red, DEF5678, 20000, 55.0, true
 3, Ford, Focus, 2018, Black, GHI9012, 30000, 45.0, false
 4, Chevrolet, Malibu, 2021, White, JKL3456, 10000, 60.0, true
