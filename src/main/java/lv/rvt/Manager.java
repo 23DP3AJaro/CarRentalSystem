@@ -22,7 +22,7 @@ public class Manager {
         reader.readLine();
 
         while ((line = reader.readLine()) != null) {
-            String[] parts = line.split(",");
+            String[] parts = line.split(", ");
             if (parts.length > 0) { 
                 int currentId = Integer.parseInt(parts[0].trim()); 
                 if (currentId > lastId) {
@@ -143,6 +143,14 @@ public class Manager {
 
 
     public static void deleteCar(int carId) throws Exception {
+        if (carId > getLastIdFromCsv("cars.csv")) {
+            System.out.println("Invalid car ID.");
+            return;
+        }
+        else if (carId < 0) {
+            System.out.println("Invalid car ID.");
+            return;
+        }
         
         List<String> lines = Files.readAllLines(Paths.get("data/cars.csv"));
     
@@ -167,7 +175,16 @@ public class Manager {
     }
 
     public static void editCar(int carId) throws Exception {
-        List<String> lines = Files.readAllLines(Paths.get("cars.csv"));
+        if (carId > getLastIdFromCsv("cars.csv")) {
+            System.out.println("Invalid car ID.");
+            return;
+        }
+        else if (carId < 0) {
+            System.out.println("Invalid car ID.");
+            return;
+        }
+
+        List<String> lines = Files.readAllLines(Paths.get("data/cars.csv"));
         Scanner scanner = new Scanner(System.in);
         
         List<String> newLines = new ArrayList<>();
@@ -180,17 +197,20 @@ public class Manager {
             int currentId = Integer.parseInt(parts[0].trim());
             
             if (currentId == carId) {
-                
+                if (parts[8].trim().equals("false")) {
+                    System.out.println("Car with ID " + carId + " is not available for editing.");
+                    return;
+                }
                 System.out.println("Editing car ID: " + carId);
                 String[] newParts = getUpdatedCarData(parts, scanner);
-                
                 newLines.add(String.join(", ", newParts));
             } else {
                 newLines.add(line);
+                
             }
         }
         
-        Files.write(Paths.get("cars.csv"), newLines, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
+        Files.write(Paths.get("data/cars.csv"), newLines, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
         System.out.println("Car with ID " + carId + " updated successfully");
     }
     
@@ -219,11 +239,12 @@ public class Manager {
         System.out.println("Current rental price: " + oldParts[7].trim() + ". New rental price (enter to keep):");
         newParts[7] = getInputOrDefault(scanner, oldParts[7].trim());
         
+        newParts[8] = oldParts[8].trim(); 
         return newParts;
     }
     
     private static String getInputOrDefault(Scanner scanner, String defaultValue) {
-        String input = scanner.nextLine(); // Считываем ввод пользователя
+        String input = scanner.nextLine(); 
         
         if (input.isEmpty()) {  
             return defaultValue; 

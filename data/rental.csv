@@ -1,3 +1,5 @@
 rental_id, client_id, car_id, start_date, end_date, total_price, is_active
-1, 1, 1, 1, 1, 1.0, true
-
+1, 2, 2, 123, 321, 0.0, true
+2, 2, 2, 123, 321, 0.0, true
+3, 2, 2, 123, 321, 0.0, true
+4, 2, 2, 124, 4321, 123.0, true
