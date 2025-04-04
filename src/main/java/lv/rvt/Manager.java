@@ -22,7 +22,7 @@ public class Manager {
         reader.readLine();
 
         while ((line = reader.readLine()) != null) {
-            String[] parts = line.split(",");
+            String[] parts = line.split(", ");
             if (parts.length > 0) { 
                 int currentId = Integer.parseInt(parts[0].trim()); 
                 if (currentId > lastId) {
@@ -143,6 +143,14 @@ public class Manager {
 
 
     public static void deleteCar(int carId) throws Exception {
+        if (carId > getLastIdFromCsv("cars.csv")) {
+            System.out.println("Invalid car ID.");
+            return;
+        }
+        else if (carId < 0) {
+            System.out.println("Invalid car ID.");
+            return;
+        }
         
         List<String> lines = Files.readAllLines(Paths.get("data/cars.csv"));
     
@@ -167,7 +175,16 @@ public class Manager {
     }
 
     public static void editCar(int carId) throws Exception {
-        List<String> lines = Files.readAllLines(Paths.get("cars.csv"));
+        if (carId > getLastIdFromCsv("cars.csv")) {
+            System.out.println("Invalid car ID.");
+            return;
+        }
+        else if (carId < 0) {
+            System.out.println("Invalid car ID.");
+            return;
+        }
+
+        List<String> lines = Files.readAllLines(Paths.get("data/cars.csv"));
         Scanner scanner = new Scanner(System.in);
         
         List<String> newLines = new ArrayList<>();
@@ -180,17 +197,20 @@ public class Manager {
             int currentId = Integer.parseInt(parts[0].trim());
             
             if (currentId == carId) {
-                
+                if (parts[8].trim().equals("false")) {
+                    System.out.println("Car with ID " + carId + " is not available for editing.");
+                    return;
+                }
                 System.out.println("Editing car ID: " + carId);
                 String[] newParts = getUpdatedCarData(parts, scanner);
-                
                 newLines.add(String.join(", ", newParts));
             } else {
                 newLines.add(line);
+                
             }
         }
         
-        Files.write(Paths.get("cars.csv"), newLines, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
+        Files.write(Paths.get("data/cars.csv"), newLines, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
         System.out.println("Car with ID " + carId + " updated successfully");
     }
     
@@ -219,11 +239,12 @@ public class Manager {
         System.out.println("Current rental price: " + oldParts[7].trim() + ". New rental price (enter to keep):");
         newParts[7] = getInputOrDefault(scanner, oldParts[7].trim());
         
+        newParts[8] = oldParts[8].trim(); 
         return newParts;
     }
     
     private static String getInputOrDefault(Scanner scanner, String defaultValue) {
-        String input = scanner.nextLine(); // Считываем ввод пользователя
+        String input = scanner.nextLine(); 
         
         if (input.isEmpty()) {  
             return defaultValue; 
@@ -231,4 +252,181 @@ public class Manager {
             return input;       
         }
     }
+
+
+
+
+public static void deleteKlienti(int klientsId) throws Exception {
+    if (klientsId > getLastIdFromCsv("klienti.csv")) {
+        System.out.println("Invalid klients ID.");
+        return;
+    }
+    else if (klientsId < 0) {
+        System.out.println("Invalid kilents ID.");
+        return;
+    }
+    
+    List<String> lines = Files.readAllLines(Paths.get("data/klienti.csv"));
+
+    List<String> newLines = new ArrayList<>();
+    newLines.add(lines.get(0)); 
+    
+    for (int i = 1; i < lines.size(); i++) {
+        String line = lines.get(i);
+        String[] parts = line.split(", ");
+        if (parts.length > 0) {
+                int currentId = Integer.parseInt(parts[0].trim());
+                if (currentId != klientsId) {
+                    newLines.add(line);
+                }
+        }
+    }
+
+
+    Files.write(Paths.get("data/klienti.csv"), newLines, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
 }
+
+public static void editKlients(int klientsId) throws Exception {
+    if (klientsId > getLastIdFromCsv("klienti.csv")) {
+        System.out.println("Invalid klients ID.");
+        return;
+    }
+    else if (klientsId < 0) {
+        System.out.println("Invalid klients ID.");
+        return;
+    }
+
+    List<String> lines = Files.readAllLines(Paths.get("data/klienti.csv"));
+    Scanner scanner = new Scanner(System.in);
+    
+    List<String> newLines = new ArrayList<>();
+    newLines.add(lines.get(0)); 
+    
+    
+    for (int i = 1; i < lines.size(); i++) {
+        String line = lines.get(i);
+        String[] parts = line.split(", ");
+        int currentId = Integer.parseInt(parts[0].trim());
+        
+        if (currentId == klientsId) {
+            System.out.println("Editing klients ID: " + klientsId);
+            String[] newParts = getUpdatedKlientsData(parts, scanner);
+            newLines.add(String.join(", ", newParts));
+        } else {
+            newLines.add(line);
+            
+        }
+    }
+    
+    Files.write(Paths.get("data/klienti.csv"), newLines, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
+    System.out.println("Kleints with ID " + klientsId + " updated successfully");
+}
+
+private static String[] getUpdatedKlientsData(String[] oldParts, Scanner scanner) {
+    String[] newParts = new String[oldParts.length];
+    newParts[0] = oldParts[0].trim();
+    
+    System.out.println("Current name: " + oldParts[1].trim() + ". New name (enter to keep):");
+    newParts[1] = getInputOrDefault(scanner, oldParts[1].trim());
+    
+    System.out.println("Current surname: " + oldParts[2].trim() + ". New surname (enter to keep):");
+    newParts[2] = getInputOrDefault(scanner, oldParts[2].trim());
+    
+    System.out.println("Current phone number: " + oldParts[3].trim() + ". New phone number (enter to keep):");
+    newParts[3] = getInputOrDefault(scanner, oldParts[3].trim());
+    return newParts;
+}
+
+
+public static void deleteRental(int rentalId) throws Exception {
+    if (rentalId > getLastIdFromCsv("rental.csv")) {
+        System.out.println("Invalid rental ID.");
+        return;
+    }
+    else if (rentalId < 0) {
+        System.out.println("Invalid rental ID.");
+        return;
+    }
+    
+    List<String> lines = Files.readAllLines(Paths.get("data/rental.csv"));
+
+    List<String> newLines = new ArrayList<>();
+    newLines.add(lines.get(0)); 
+    
+    for (int i = 1; i < lines.size(); i++) {
+        String line = lines.get(i);
+        String[] parts = line.split(", ");
+        if (parts.length > 0) {
+                int currentId = Integer.parseInt(parts[0].trim());
+                if (currentId != rentalId) {
+                    newLines.add(line);
+                }
+        }
+    }
+
+
+    Files.write(Paths.get("data/rental.csv"), newLines, 
+        StandardOpenOption.TRUNCATE_EXISTING,
+        StandardOpenOption.WRITE);
+}
+
+public static void editRental(int rentalId) throws Exception {
+    if (rentalId > getLastIdFromCsv("rental.csv")) {
+        System.out.println("Invalid rental ID.");
+        return;
+    }
+    else if (rentalId < 0) {
+        System.out.println("Invalid rental ID.");
+        return;
+    }
+
+    List<String> lines = Files.readAllLines(Paths.get("data/rental.csv"));
+    Scanner scanner = new Scanner(System.in);
+    
+    List<String> newLines = new ArrayList<>();
+    newLines.add(lines.get(0)); 
+    
+    
+    for (int i = 1; i < lines.size(); i++) {
+        String line = lines.get(i);
+        String[] parts = line.split(", ");
+        int currentId = Integer.parseInt(parts[0].trim());
+        
+        if (currentId == rentalId) {
+            if (parts[6].trim().equals("true")) {
+                System.out.println("Rental with ID " + rentalId + " is not available for editing.");
+                return;
+            }
+            System.out.println("Editing rental ID: " + rentalId);
+            String[] newParts = getUpdatedRentalData(parts, scanner);
+            newLines.add(String.join(", ", newParts));
+        } else {
+            newLines.add(line);
+            
+        }
+    }
+    
+    Files.write(Paths.get("data/rental.csv"), newLines, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
+    System.out.println("Rental with ID " + rentalId + " updated successfully");
+}
+
+private static String[] getUpdatedRentalData(String[] oldParts, Scanner scanner) {
+    String[] newParts = new String[oldParts.length];
+    newParts[0] = oldParts[0].trim();
+    
+    newParts[1] = oldParts[1].trim(); 
+    
+    newParts[2] = oldParts[2].trim(); 
+    
+    System.out.println("Current start date: " + oldParts[3].trim() + ". New start date (enter to keep):");
+    newParts[3] = getInputOrDefault(scanner, oldParts[3].trim());
+
+    System.out.println("Current end date: " + oldParts[4].trim() + ". New end date (enter to keep):");
+    newParts[4] = getInputOrDefault(scanner, oldParts[4].trim());
+
+    System.out.println("Current total price: " + oldParts[5].trim() + ". New total price (enter to keep):");
+    newParts[5] = getInputOrDefault(scanner, oldParts[5].trim());
+    
+    newParts[6] = oldParts[6].trim(); 
+    return newParts;
+}}
