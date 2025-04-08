@@ -438,4 +438,8 @@ public class UI {
         }
         }
     }
+
+    public static void CarsTableFilters() throws Exception {
+        
+    }
 }

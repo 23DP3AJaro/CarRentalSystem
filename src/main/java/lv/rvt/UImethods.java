@@ -119,11 +119,20 @@ public class UImethods {
         if (position.equals("1")) {
             UI.PrintPersonTable();
         } else if (position.equals("2")) {
-
+            Manager.userAddKlients();
+            System.out.println("\n" + ANSI_GREEN + "Klients pievienots!" + ANSI_RESET);
+            TimeUnit.SECONDS.sleep(3);
+            UI.ShowClientControl();
         } else if (position.equals("3")) {
-
+            Manager.deleteKlienti();
+            System.out.println("\n" + ANSI_RED + "Klients tiks izdzēsts." + ANSI_RESET);
+            TimeUnit.SECONDS.sleep(3);
+            UI.ShowClientControl();
         } else if (position.equals("4")) {
-
+            Manager.editKlients();
+            System.out.println("\n" + ANSI_GREEN + "Klients rediģēts!" + ANSI_RESET);
+            TimeUnit.SECONDS.sleep(3);
+            UI.ShowClientControl();
         } else if (position.equals("5")) {
             UI.MainMenu();
         } else {
