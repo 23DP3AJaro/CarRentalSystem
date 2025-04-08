@@ -120,12 +120,26 @@ public class Rental {
 
     public static void returnCar() throws Exception {
         Scanner scanner = new Scanner(System.in);
+        BufferedReader reader = Helper.getReader("rental.csv");
+        String line;
+        int carId = 0;
 
         System.out.println("Enter rental ID: ");
         int rentalId = Integer.parseInt(scanner.nextLine());
 
-        System.out.println("Enter car ID: ");
-        int carId = Integer.parseInt(scanner.nextLine());
+        reader.readLine();
+
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(", ");
+            if (parts.length > 1) {
+                int currentRentalId = Integer.parseInt(parts[0].trim());
+                if (currentRentalId == rentalId) {
+                    carId = Integer.parseInt(parts[2].trim()); 
+                }
+            }
+        }
+        
+        
 
 
         updateRentalStatus(rentalId);
