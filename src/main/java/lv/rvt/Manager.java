@@ -47,7 +47,7 @@ public class Manager {
         BufferedWriter writer = Helper.getWriter("klienti.csv", StandardOpenOption.APPEND);
 
 
-        writer.write(klients.getId() + ", " + klients.getName() + ", " + klients.getSurname() + ", " + klients.getBirthDate()); 
+        writer.write(klients.getId() + ", " + klients.getName() + ", " + klients.getSurname() + ", " + klients.getPhoneNumber()); 
         writer.newLine();
         writer.close();
     }
@@ -142,7 +142,11 @@ public class Manager {
     }
 
 
-    public static void deleteCar(int carId) throws Exception {
+    public static void deleteCar() throws Exception {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter car ID to delete: ");
+        int carId = Integer.parseInt(scanner.nextLine());
         if (carId > getLastIdFromCsv("cars.csv")) {
             System.out.println("Invalid car ID.");
             return;
@@ -256,7 +260,14 @@ public class Manager {
 
 
 
-public static void deleteKlienti(int klientsId) throws Exception {
+public static void deleteKlienti() throws Exception {
+
+    
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("Enter klients ID to delete: ");
+    int klientsId = Integer.parseInt(scanner.nextLine());
+
     if (klientsId > getLastIdFromCsv("klienti.csv")) {
         System.out.println("Invalid klients ID.");
         return;
@@ -286,7 +297,12 @@ public static void deleteKlienti(int klientsId) throws Exception {
     Files.write(Paths.get("data/klienti.csv"), newLines, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
 }
 
-public static void editKlients(int klientsId) throws Exception {
+public static void editKlients() throws Exception {
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("Enter klients ID to edit: ");
+    int klientsId = Integer.parseInt(scanner.nextLine());
+
     if (klientsId > getLastIdFromCsv("klienti.csv")) {
         System.out.println("Invalid klients ID.");
         return;
@@ -297,7 +313,6 @@ public static void editKlients(int klientsId) throws Exception {
     }
 
     List<String> lines = Files.readAllLines(Paths.get("data/klienti.csv"));
-    Scanner scanner = new Scanner(System.in);
     
     List<String> newLines = new ArrayList<>();
     newLines.add(lines.get(0)); 
@@ -338,7 +353,12 @@ private static String[] getUpdatedKlientsData(String[] oldParts, Scanner scanner
 }
 
 
-public static void deleteRental(int rentalId) throws Exception {
+public static void deleteRental() throws Exception {
+    Scanner scanner = new Scanner(System.in);
+
+
+    System.out.println("Enter rental ID to delete: ");
+    int rentalId = Integer.parseInt(scanner.nextLine());
     if (rentalId > getLastIdFromCsv("rental.csv")) {
         System.out.println("Invalid rental ID.");
         return;
@@ -370,7 +390,12 @@ public static void deleteRental(int rentalId) throws Exception {
         StandardOpenOption.WRITE);
 }
 
-public static void editRental(int rentalId) throws Exception {
+public static void editRental() throws Exception {
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("Enter rental ID to edit: ");
+    int rentalId = Integer.parseInt(scanner.nextLine());
+
     if (rentalId > getLastIdFromCsv("rental.csv")) {
         System.out.println("Invalid rental ID.");
         return;
@@ -381,7 +406,6 @@ public static void editRental(int rentalId) throws Exception {
     }
 
     List<String> lines = Files.readAllLines(Paths.get("data/rental.csv"));
-    Scanner scanner = new Scanner(System.in);
     
     List<String> newLines = new ArrayList<>();
     newLines.add(lines.get(0)); 

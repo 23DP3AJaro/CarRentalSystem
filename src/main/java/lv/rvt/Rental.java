@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import lv.rvt.tools.Helper;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Rental {
 
@@ -32,6 +35,7 @@ public class Rental {
 
     public static void createRental() throws Exception {
         Scanner scanner = new Scanner(System.in);
+         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         System.out.println("Enter client ID: ");
         int clientId = Integer.parseInt(scanner.nextLine());
@@ -52,16 +56,40 @@ public class Rental {
             return;
         }
 
+        
+    String startDateStr;
+    while (true) {
         System.out.println("Enter start date (YYYY-MM-DD): ");
-        String startDate = scanner.nextLine();
+        startDateStr = scanner.nextLine();
+        try {
+            LocalDate.parse(startDateStr, formatter);
+            break;
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date format. Please enter date in YYYY-MM-DD format.");
+        }
+    }
 
+    String endDateStr;
+    while (true) {
         System.out.println("Enter end date (YYYY-MM-DD): ");
-        String endDate = scanner.nextLine();
+        endDateStr = scanner.nextLine();
+        try {
+            LocalDate startDate = LocalDate.parse(startDateStr, formatter);
+            LocalDate endDate = LocalDate.parse(endDateStr, formatter);
+            if (endDate.isBefore(startDate)) {
+                System.out.println("End date cannot be before start date. Please enter a valid end date.");
+            } else {
+                break;
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date format. Please enter date in YYYY-MM-DD format.");
+        }
+    }
 
         System.out.println("Enter total price: ");
         double totalPrice = Double.parseDouble(scanner.nextLine());
         
-        Rental rental = new Rental(clientId, carId, startDate, endDate, totalPrice);
+        Rental rental = new Rental(clientId, carId, startDateStr, endDateStr, totalPrice);
 
         Manager.addRentalToFile(rental);
 

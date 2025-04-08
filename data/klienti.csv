@@ -1,4 +1,4 @@
-id, name, surname, phone
+id, name, surname, phone_number
 1, Mihail, Hapilov, 12345678
 2, Anna, Ivanova, 87654321
 3, John, Doe, 11223344
