@@ -70,7 +70,7 @@ public class Manager {
         System.out.println("Surname: ");
         String inputSurname = scanner.nextLine();
 
-        System.out.println("Birth date: "); 
+        System.out.println("Phone number: "); 
         String inputBirthDate = scanner.nextLine();
         
         Klienti klients = new Klienti(inputName, inputSurname, inputBirthDate);
@@ -142,11 +142,7 @@ public class Manager {
     }
 
 
-    public static void deleteCar() throws Exception {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Enter car ID to delete: ");
-        int carId = Integer.parseInt(scanner.nextLine());
+    public static void deleteCar(int carId) throws Exception {
         if (carId > getLastIdFromCsv("cars.csv")) {
             System.out.println("Invalid car ID.");
             return;
