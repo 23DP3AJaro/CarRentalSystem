@@ -35,69 +35,67 @@ public class Rental {
 
     public static void createRental() throws Exception {
         Scanner scanner = new Scanner(System.in);
-         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        System.out.println("Enter client ID: ");
+        System.out.println("Ievadiet klienta ID: ");
         int clientId = Integer.parseInt(scanner.nextLine());
         while (clientId > Manager.getLastIdFromCsv("klienti.csv")) {
-            System.out.println("Client ID does not exist. Please enter a valid client ID: ");
-            clientId = Integer.parseInt(scanner.nextLine());;
+            System.out.println("Klienta ID neeksistē. Lūdzu, ievadiet derīgu klienta ID: ");
+            clientId = Integer.parseInt(scanner.nextLine());
         }
 
-        System.out.println("Enter car ID: ");
+        System.out.println("Ievadiet automašīnas ID: ");
         int carId = Integer.parseInt(scanner.nextLine());
         while (carId > Manager.getLastIdFromCsv("cars.csv")) {
-            System.out.println("Car ID does not exist. Please enter a valid car ID: ");
+            System.out.println("Automašīnas ID neeksistē. Lūdzu, ievadiet derīgu automašīnas ID: ");
             Integer.parseInt(scanner.nextLine());
         }
 
         if (isCarAvailable(carId) == false) {
-            System.out.println("This car is not available for rent.");
+            System.out.println("Šī automašīna nav pieejama nomai.");
             return;
         }
 
-        
-    String startDateStr;
-    while (true) {
-        System.out.println("Enter start date (YYYY-MM-DD): ");
-        startDateStr = scanner.nextLine();
-        try {
-            LocalDate.parse(startDateStr, formatter);
-            break;
-        } catch (DateTimeParseException e) {
-            System.out.println("Invalid date format. Please enter date in YYYY-MM-DD format.");
-        }
-    }
-
-    String endDateStr;
-    while (true) {
-        System.out.println("Enter end date (YYYY-MM-DD): ");
-        endDateStr = scanner.nextLine();
-        try {
-            LocalDate startDate = LocalDate.parse(startDateStr, formatter);
-            LocalDate endDate = LocalDate.parse(endDateStr, formatter);
-            if (endDate.isBefore(startDate)) {
-                System.out.println("End date cannot be before start date. Please enter a valid end date.");
-            } else {
+        String startDateStr;
+        while (true) {
+            System.out.println("Ievadiet sākuma datumu (GGGG-MM-DD): ");
+            startDateStr = scanner.nextLine();
+            try {
+                LocalDate.parse(startDateStr, formatter);
                 break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Nepareizs datuma formāts. Lūdzu, ievadiet datumu formātā GGGG-MM-DD.");
             }
-        } catch (DateTimeParseException e) {
-            System.out.println("Invalid date format. Please enter date in YYYY-MM-DD format.");
         }
-    }
 
-        System.out.println("Enter total price: ");
+        String endDateStr;
+        while (true) {
+            System.out.println("Ievadiet beigu datumu (GGGG-MM-DD): ");
+            endDateStr = scanner.nextLine();
+            try {
+                LocalDate startDate = LocalDate.parse(startDateStr, formatter);
+                LocalDate endDate = LocalDate.parse(endDateStr, formatter);
+                if (endDate.isBefore(startDate)) {
+                    System.out.println("Beigu datums nevar būt pirms sākuma datuma. Lūdzu, ievadiet derīgu beigu datumu.");
+                } else {
+                    break;
+                }
+            } catch (DateTimeParseException e) {
+                System.out.println("Nepareizs datuma formāts. Lūdzu, ievadiet datumu formātā GGGG-MM-DD.");
+            }
+        }
+
+        System.out.println("Ievadiet kopējo cenu: ");
         double totalPrice = Double.parseDouble(scanner.nextLine());
-        
+
         Rental rental = new Rental(clientId, carId, startDateStr, endDateStr, totalPrice);
 
         Manager.addRentalToFile(rental);
 
         markCarAsRented(carId, false);
 
-        System.out.println("Rental created successfully!");
+        System.out.println("Noma veiksmīgi izveidota!");
     }
-
 
     private static boolean isCarAvailable(int carId) throws Exception {
         BufferedReader reader = Helper.getReader("cars.csv");
@@ -109,10 +107,9 @@ public class Rental {
         for (int i = 0; i < carId; i++) {
             line = reader.readLine();
             String[] parts = line.split(", ");
-            if (parts.length > 0) { 
-                isAvailable = Boolean.parseBoolean(parts[8].trim()); 
-            }
-            else {
+            if (parts.length > 0) {
+                isAvailable = Boolean.parseBoolean(parts[8].trim());
+            } else {
                 return false;
             }
         }
@@ -122,29 +119,25 @@ public class Rental {
 
     private static void markCarAsRented(int carId, boolean available) throws Exception {
         List<String> lines = Files.readAllLines(Paths.get("data/cars.csv"));
-        
+
         List<String> newLines = new ArrayList<>();
-        newLines.add(lines.get(0)); 
-        
-        
+        newLines.add(lines.get(0));
+
         for (int i = 1; i < lines.size(); i++) {
             String line = lines.get(i);
             String[] parts = line.split(", ");
             int currentId = Integer.parseInt(parts[0].trim());
-            
+
             if (currentId == carId) {
-                
                 newLines.add(line.replace(parts[8], String.valueOf(available)));
             } else {
                 newLines.add(line);
-                
             }
         }
-        
+
         Files.write(Paths.get("data/cars.csv"), newLines, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
-        System.out.println("Car with ID " + carId + " updated successfully");
+        System.out.println("Automobiļa ID " + carId + " veiksmīgi atjaunināts");
     }
-    
 
     public static void returnCar() throws Exception {
         Scanner scanner = new Scanner(System.in);
@@ -152,7 +145,7 @@ public class Rental {
         String line;
         int carId = 0;
 
-        System.out.println("Enter rental ID: ");
+        System.out.println("Ievadiet nomas ID: ");
         int rentalId = Integer.parseInt(scanner.nextLine());
 
         reader.readLine();
@@ -162,45 +155,39 @@ public class Rental {
             if (parts.length > 1) {
                 int currentRentalId = Integer.parseInt(parts[0].trim());
                 if (currentRentalId == rentalId) {
-                    carId = Integer.parseInt(parts[2].trim()); 
+                    carId = Integer.parseInt(parts[2].trim());
                 }
             }
         }
-        
-        
-
 
         updateRentalStatus(rentalId);
 
         markCarAsRented(carId, true);
 
-        System.out.println("Car returned successfully!");
+        System.out.println("Automobilis veiksmīgi atgriezts!");
     }
 
     private static void updateRentalStatus(int rentalId) throws Exception {
         List<String> lines = Files.readAllLines(Paths.get("data/rental.csv"));
-        
+
         List<String> newLines = new ArrayList<>();
-        newLines.add(lines.get(0)); 
-        
+        newLines.add(lines.get(0));
+
         for (int i = 1; i < lines.size(); i++) {
             String line = lines.get(i);
             String[] parts = line.split(", ");
             int currentId = Integer.parseInt(parts[0].trim());
-            
+
             if (currentId == rentalId) {
                 newLines.add(line.replace(parts[6], String.valueOf(false)));
             } else {
                 newLines.add(line);
-                
             }
         }
-        
+
         Files.write(Paths.get("data/rental.csv"), newLines, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
-        System.out.println("Rental with ID " + rentalId + " updated successfully");
-
+        System.out.println("Noma ar ID " + rentalId + " veiksmīgi atjaunināta");
     }
-
 
     public int getRentalId() {
         return rentalId;
