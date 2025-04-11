@@ -70,7 +70,7 @@ public class Manager {
         System.out.println("Uzvards: ");
         String inputSurname = scanner.nextLine();
 
-        System.out.println("Tel. numurs: "); 
+        System.out.println("Phone number: "); 
         String inputPhoneNumber = scanner.nextLine();
         
         Klienti klients = new Klienti(inputName, inputSurname, inputPhoneNumber);
