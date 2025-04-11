@@ -64,16 +64,16 @@ public class Manager {
     public static void userAddKlients() throws Exception{
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Name: ");
+        System.out.println("Vards: ");
         String inputName = scanner.nextLine();
 
-        System.out.println("Surname: ");
+        System.out.println("Uzvards: ");
         String inputSurname = scanner.nextLine();
 
-        System.out.println("Birth date: "); 
-        String inputBirthDate = scanner.nextLine();
+        System.out.println("Tel. numurs: "); 
+        String inputPhoneNumber = scanner.nextLine();
         
-        Klienti klients = new Klienti(inputName, inputSurname, inputBirthDate);
+        Klienti klients = new Klienti(inputName, inputSurname, inputPhoneNumber);
 
         addKlients(klients);
     }
@@ -81,58 +81,58 @@ public class Manager {
     public static void userAddCars() throws Exception{
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Brand: ");
+        System.out.println("Brands: ");
         String inputBrand = scanner.nextLine();
 
-        System.out.println("Model: ");
+        System.out.println("Modelis: ");
         String inputModel = scanner.nextLine();
 
         int inputYearOfManufacture;
         while (true) {
-            System.out.println("Year of manufacture: ");
+            System.out.println("Ražots gads: ");
             try {
                 inputYearOfManufacture = Integer.parseInt(scanner.nextLine());
                 break;
                 
                 
             } catch(NumberFormatException e){
-                System.out.println("Invalid input. Enter a number.");
+                System.out.println("Nepareizs ievads. Ievadiet skaitli.");
             }
         }
 
-        System.out.println("Color: ");
+        System.out.println("Krasa: ");
         String inputColor = scanner.nextLine();
 
-        System.out.println("License plate: ");
+        System.out.println("Numurs: ");
         String inputLicensePlate = scanner.nextLine();
 
         int inputMileage;
         while (true) {
-            System.out.println("Mileage: ");
+            System.out.println("Nobraukums: ");
             try {
                 inputMileage = Integer.parseInt(scanner.nextLine());
                 if (inputMileage >= 0) {
                     break;
                 } else {
-                    System.out.println("Invalid mileage. Must be a positive number.");
+                    System.out.println("Nepareizs nobraukums. Tam jabut pozitīvam skaitlim.");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Enter a number.");
+                System.out.println("Nepareizs ievads. Ievadiet skaitli.");
             }
         }
 
         double inputRentalPrice;
         while (true) {
-            System.out.println("Rental price: ");
+            System.out.println("Iznomāšanas cena: ");
             try {
                 inputRentalPrice = Double.parseDouble(scanner.nextLine());
                 if (inputRentalPrice >= 0) {
                     break;
                 } else {
-                    System.out.println("Invalid rental price. Must be a positive number.");
+                    System.out.println("Nepareiza cena. Tam jabut pozitīvam skaitlim.");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Enter a number.");
+                System.out.println("Nepareizs ievads. Ievadiet skaitli.");
             }
         }
 
@@ -142,19 +142,7 @@ public class Manager {
     }
 
 
-    public static void deleteCar() throws Exception {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Enter car ID to delete: ");
-        int carId = Integer.parseInt(scanner.nextLine());
-        if (carId > getLastIdFromCsv("cars.csv")) {
-            System.out.println("Invalid car ID.");
-            return;
-        }
-        else if (carId < 0) {
-            System.out.println("Invalid car ID.");
-            return;
-        }
+    public static void deleteCar(int carId) throws Exception {
         
         List<String> lines = Files.readAllLines(Paths.get("data/cars.csv"));
     
@@ -180,11 +168,11 @@ public class Manager {
 
     public static void editCar(int carId) throws Exception {
         if (carId > getLastIdFromCsv("cars.csv")) {
-            System.out.println("Invalid car ID.");
+            System.out.println("Nepareizi auto ID.");
             return;
         }
         else if (carId < 0) {
-            System.out.println("Invalid car ID.");
+            System.out.println("Nepareizi auto ID.");
             return;
         }
 
@@ -202,10 +190,10 @@ public class Manager {
             
             if (currentId == carId) {
                 if (parts[8].trim().equals("false")) {
-                    System.out.println("Car with ID " + carId + " is not available for editing.");
+                    System.out.println("Auto ar ID " + carId + " nav pieejams rediģēšanai.");
                     return;
                 }
-                System.out.println("Editing car ID: " + carId);
+                System.out.println("Rediģē auto ID: " + carId);
                 String[] newParts = getUpdatedCarData(parts, scanner);
                 newLines.add(String.join(", ", newParts));
             } else {
@@ -215,32 +203,32 @@ public class Manager {
         }
         
         Files.write(Paths.get("data/cars.csv"), newLines, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
-        System.out.println("Car with ID " + carId + " updated successfully");
+        System.out.println("Auto ar ID " + carId + " veiksmīgi atjaunots");
     }
     
     private static String[] getUpdatedCarData(String[] oldParts, Scanner scanner) {
         String[] newParts = new String[oldParts.length];
         newParts[0] = oldParts[0].trim();
         
-        System.out.println("Current brand: " + oldParts[1].trim() + ". New brand (enter to keep):");
+        System.out.println("Pašreizējais brands: " + oldParts[1].trim() + ". Jauns brands (nospiediet Enter, lai saglabātu esošo):");
         newParts[1] = getInputOrDefault(scanner, oldParts[1].trim());
         
-        System.out.println("Current model: " + oldParts[2].trim() + ". New model (enter to keep):");
+        System.out.println("Pašreizējais modelis: " + oldParts[2].trim() + ". Jauns modelis (nospiediet Enter, lai saglabātu esošo):");
         newParts[2] = getInputOrDefault(scanner, oldParts[2].trim());
         
-        System.out.println("Current year of manufacture: " + oldParts[3].trim() + ". New year of manufacture (enter to keep):");
+        System.out.println("Pašreizējais ražošanas gads: " + oldParts[3].trim() + ". Jauns ražošanas gads (nospiediet Enter, lai saglabātu esošo):");
         newParts[3] = getInputOrDefault(scanner, oldParts[3].trim());
 
-        System.out.println("Current color: " + oldParts[4].trim() + ". New color (enter to keep):");
+        System.out.println("Pašreizējā krāsa: " + oldParts[4].trim() + ". Jauna krāsa (nospiediet Enter, lai saglabātu esošo):");
         newParts[4] = getInputOrDefault(scanner, oldParts[4].trim());
 
-        System.out.println("Current license plate: " + oldParts[5].trim() + ". New license plate (enter to keep):");
+        System.out.println("Pašreizējais numura zīme: " + oldParts[5].trim() + ". Jauna numura zīme (nospiediet Enter, lai saglabātu esošo):");
         newParts[5] = getInputOrDefault(scanner, oldParts[5].trim());
 
-        System.out.println("Current mileage: " + oldParts[6].trim() + ". New mileage (enter to keep):");
+        System.out.println("Pašreizējais nobraukums: " + oldParts[6].trim() + ". Jauns nobraukums (nospiediet Enter, lai saglabātu esošo):");
         newParts[6] = getInputOrDefault(scanner, oldParts[6].trim());
 
-        System.out.println("Current rental price: " + oldParts[7].trim() + ". New rental price (enter to keep):");
+        System.out.println("Pašreizējā iznomāšanas cena: " + oldParts[7].trim() + ". Jauna iznomāšanas cena (nospiediet Enter, lai saglabātu esošo):");
         newParts[7] = getInputOrDefault(scanner, oldParts[7].trim());
         
         newParts[8] = oldParts[8].trim(); 
@@ -265,15 +253,15 @@ public static void deleteKlienti() throws Exception {
     
     Scanner scanner = new Scanner(System.in);
 
-    System.out.println("Enter klients ID to delete: ");
+    System.out.println("Ievadiet klients ID, kuru vēlaties dzēst: ");
     int klientsId = Integer.parseInt(scanner.nextLine());
 
     if (klientsId > getLastIdFromCsv("klienti.csv")) {
-        System.out.println("Invalid klients ID.");
+        System.out.println("Nepareizi klients ID.");
         return;
     }
     else if (klientsId < 0) {
-        System.out.println("Invalid kilents ID.");
+        System.out.println("Nepareizi klients ID.");
         return;
     }
     
@@ -300,15 +288,15 @@ public static void deleteKlienti() throws Exception {
 public static void editKlients() throws Exception {
     Scanner scanner = new Scanner(System.in);
 
-    System.out.println("Enter klients ID to edit: ");
+    System.out.println("Ievadiet klients ID, kuru vēlaties rediģēt: ");
     int klientsId = Integer.parseInt(scanner.nextLine());
 
     if (klientsId > getLastIdFromCsv("klienti.csv")) {
-        System.out.println("Invalid klients ID.");
+        System.out.println("Nepareizi klients ID.");
         return;
     }
     else if (klientsId < 0) {
-        System.out.println("Invalid klients ID.");
+        System.out.println("Nepareizi klients ID.");
         return;
     }
 
@@ -324,7 +312,7 @@ public static void editKlients() throws Exception {
         int currentId = Integer.parseInt(parts[0].trim());
         
         if (currentId == klientsId) {
-            System.out.println("Editing klients ID: " + klientsId);
+            System.out.println("Rediģēt klienta ID: " + klientsId);
             String[] newParts = getUpdatedKlientsData(parts, scanner);
             newLines.add(String.join(", ", newParts));
         } else {
@@ -334,20 +322,20 @@ public static void editKlients() throws Exception {
     }
     
     Files.write(Paths.get("data/klienti.csv"), newLines, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
-    System.out.println("Kleints with ID " + klientsId + " updated successfully");
+    System.out.println("Kleints ar ID " + klientsId + " veiksmīgi atjaunots!");
 }
 
 private static String[] getUpdatedKlientsData(String[] oldParts, Scanner scanner) {
     String[] newParts = new String[oldParts.length];
     newParts[0] = oldParts[0].trim();
     
-    System.out.println("Current name: " + oldParts[1].trim() + ". New name (enter to keep):");
+    System.out.println("Pašreizējais vārds: " + oldParts[1].trim() + ". Jauns vārds (nospiediet Enter, lai saglabātu esošo):");
     newParts[1] = getInputOrDefault(scanner, oldParts[1].trim());
     
-    System.out.println("Current surname: " + oldParts[2].trim() + ". New surname (enter to keep):");
+    System.out.println("Pašreizējais uzvārds: " + oldParts[2].trim() + ". Jauns uzvārds (nospiediet Enter, lai saglabātu esošo):");
     newParts[2] = getInputOrDefault(scanner, oldParts[2].trim());
     
-    System.out.println("Current phone number: " + oldParts[3].trim() + ". New phone number (enter to keep):");
+    System.out.println("Pašreizējais tālruņa numurs: " + oldParts[3].trim() + ". Jauns tālruņa numurs (nospiediet Enter, lai saglabātu esošo):");
     newParts[3] = getInputOrDefault(scanner, oldParts[3].trim());
     return newParts;
 }
@@ -357,14 +345,14 @@ public static void deleteRental() throws Exception {
     Scanner scanner = new Scanner(System.in);
 
 
-    System.out.println("Enter rental ID to delete: ");
+    System.out.println("Ievadiet iznomāšanas ID, kuru vēlaties dzēst: ");
     int rentalId = Integer.parseInt(scanner.nextLine());
     if (rentalId > getLastIdFromCsv("rental.csv")) {
-        System.out.println("Invalid rental ID.");
+        System.out.println("Nepareizi iznomāšanas ID.");
         return;
     }
     else if (rentalId < 0) {
-        System.out.println("Invalid rental ID.");
+        System.out.println("Nepareizi iznomāšanas ID.");
         return;
     }
     
@@ -393,15 +381,15 @@ public static void deleteRental() throws Exception {
 public static void editRental() throws Exception {
     Scanner scanner = new Scanner(System.in);
 
-    System.out.println("Enter rental ID to edit: ");
+    System.out.println("Ievadiet iznomāšanas ID, kuru vēlaties rediģēt: ");
     int rentalId = Integer.parseInt(scanner.nextLine());
 
     if (rentalId > getLastIdFromCsv("rental.csv")) {
-        System.out.println("Invalid rental ID.");
+        System.out.println("Nepareizi iznomāšanas ID.");
         return;
     }
     else if (rentalId < 0) {
-        System.out.println("Invalid rental ID.");
+        System.out.println("Nepareizi iznomāšanas ID.");
         return;
     }
 
@@ -418,10 +406,10 @@ public static void editRental() throws Exception {
         
         if (currentId == rentalId) {
             if (parts[6].trim().equals("true")) {
-                System.out.println("Rental with ID " + rentalId + " is not available for editing.");
+                System.out.println("Iznomāšana ar ID " + rentalId + " nav pieejama rediģēšanai.");
                 return;
             }
-            System.out.println("Editing rental ID: " + rentalId);
+            System.out.println("Rediģē iznomāšanas ID: " + rentalId);
             String[] newParts = getUpdatedRentalData(parts, scanner);
             newLines.add(String.join(", ", newParts));
         } else {
@@ -431,7 +419,7 @@ public static void editRental() throws Exception {
     }
     
     Files.write(Paths.get("data/rental.csv"), newLines, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
-    System.out.println("Rental with ID " + rentalId + " updated successfully");
+    System.out.println("Iznomāšana ar ID " + rentalId + " veiksmīgi atjaunota");
 }
 
 private static String[] getUpdatedRentalData(String[] oldParts, Scanner scanner) {
@@ -442,13 +430,13 @@ private static String[] getUpdatedRentalData(String[] oldParts, Scanner scanner)
     
     newParts[2] = oldParts[2].trim(); 
     
-    System.out.println("Current start date: " + oldParts[3].trim() + ". New start date (enter to keep):");
+    System.out.println("Pašreizējais sākuma datums: " + oldParts[3].trim() + ". Jauns sākuma datums (nospiediet Enter, lai saglabātu esošo):");
     newParts[3] = getInputOrDefault(scanner, oldParts[3].trim());
 
-    System.out.println("Current end date: " + oldParts[4].trim() + ". New end date (enter to keep):");
+    System.out.println("Pašreizējais beigu datums: " + oldParts[4].trim() + ". Jauns beigu datums (nospiediet Enter, lai saglabātu esošo):");
     newParts[4] = getInputOrDefault(scanner, oldParts[4].trim());
 
-    System.out.println("Current total price: " + oldParts[5].trim() + ". New total price (enter to keep):");
+    System.out.println("Pašreizējā kopējā cena: " + oldParts[5].trim() + ". Jauna kopējā cena (nospiediet Enter, lai saglabātu esošo):");
     newParts[5] = getInputOrDefault(scanner, oldParts[5].trim());
     
     newParts[6] = oldParts[6].trim(); 
