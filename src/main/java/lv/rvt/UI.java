@@ -439,7 +439,82 @@ public class UI {
         }
     }
 
-    public static void CarsTableFilters() throws Exception {
-        
+    public static void PrintRentalTable() throws Exception {
+        BufferedReader reader = Helper.getReader("rental.csv");
+        String line;
+        final String ANSI_YELLOW = "\u001B[33m";
+        final String ANSI_RESET = "\u001B[0m";
+
+        reader.readLine();
+        UImethods.clearScreen();
+
+        System.out.println(ANSI_YELLOW);
+        System.out.printf("%-6s %-14s %-15s %-22s %-22s %-16s %-21s%n", "ID", "| Klienta ID", "| Mašīnas ID", "| Sakuma datums", "| Beiguma datums", "| Kopēja cena", "| Aktuālais statuss");
+        System.out.print(ANSI_RESET);
+
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(", ");
+
+            Integer id;
+            Integer clientId;
+            Integer carId;
+            String startDate;
+            String endDate;
+            Double totalPrice;
+            Boolean status;
+            id = Integer.valueOf(parts[0]);
+            clientId = Integer.valueOf(parts[1]);
+            carId = Integer.valueOf(parts[2]);
+            startDate = parts[3];
+            endDate = parts[4];
+            totalPrice = Double.valueOf(parts[5]);
+            status = Boolean.valueOf(parts[6]);
+
+            System.out.printf("%-6s %-14s %-15s %-22s %-22s %-16s %-21s%n", "" + id, "| " + clientId, "| " + carId, "| " + startDate, "| " + endDate, "| " + totalPrice, "| " + status);
+        }
+
+        System.out.println("\n"+"1. Filtrēt nomas");
+        System.out.println("2. Atpakaļ");
+        UImethods.ChangePositionRentalTable();
+    }
+
+    public static void PrintRentalTableIncorrectPosition() throws Exception {
+        BufferedReader reader = Helper.getReader("rental.csv");
+        String line;
+        final String ANSI_YELLOW = "\u001B[33m";
+        final String ANSI_RESET = "\u001B[0m";
+
+        reader.readLine();
+        UImethods.clearScreen();
+
+        System.out.println(ANSI_YELLOW);
+        System.out.printf("%-6s %-14s %-15s %-22s %-22s %-16s %-21s%n", "ID", "| Klienta ID", "| Mašīnas ID", "| Sakuma datums", "| Beiguma datums", "| Kopēja cena", "| Aktuālais statuss");
+        System.out.print(ANSI_RESET);
+
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(", ");
+
+            Integer id;
+            Integer clientId;
+            Integer carId;
+            String startDate;
+            String endDate;
+            Double totalPrice;
+            Boolean status;
+            id = Integer.valueOf(parts[0]);
+            clientId = Integer.valueOf(parts[1]);
+            carId = Integer.valueOf(parts[2]);
+            startDate = parts[3];
+            endDate = parts[4];
+            totalPrice = Double.valueOf(parts[5]);
+            status = Boolean.valueOf(parts[6]);
+
+            System.out.printf("%-6s %-14s %-15s %-22s %-22s %-16s %-21s%n", "" + id, "| " + clientId, "| " + carId, "| " + startDate, "| " + endDate, "| " + totalPrice, "| " + status);
+        }
+
+        System.out.println("\n" + "1. Atrast nomu");
+        System.out.println("2. Filtrēt nomas");
+        System.out.println("3. Atpakaļ");
+        UImethods.ChangePositionRentalTable();
     }
 }

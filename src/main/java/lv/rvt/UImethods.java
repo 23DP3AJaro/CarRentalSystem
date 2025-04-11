@@ -141,6 +141,25 @@ public class UImethods {
         }
     }
 
+    public static void ChangePositionRentalTable() throws Exception {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("\nIevadiet poziciju: ");
+
+        String position = scanner.nextLine();
+
+        if (position.equals("1")) {
+            
+        } else if (position.equals("2")) {
+            
+        } else if (position.equals("3")) {
+            UI.ShowRentControl();
+        } else {
+            UI.PrintRentalTableIncorrectPosition();
+            ChangePositionRentalTable();
+        }
+    }
+
     public static void ChangePositionRent() throws Exception {
         final String ANSI_RED = "\u001B[31m";
         final String ANSI_RESET = "\u001B[0m";
@@ -151,13 +170,17 @@ public class UImethods {
         String position = scanner.nextLine();
 
         if (position.equals("1")) {
-
+            UI.PrintRentalTable();
+            
         } else if (position.equals("2")) {
-
+            Rental.createRental();
+            UI.ShowRentControl();
         } else if (position.equals("3")) {
-
+            Manager.deleteRental();
+            UI.ShowRentControl();
         } else if (position.equals("4")) {
-
+            Manager.editRental();
+            UI.ShowRentControl();
         } else if (position.equals("5")) {
             UI.MainMenu();
         } else {
