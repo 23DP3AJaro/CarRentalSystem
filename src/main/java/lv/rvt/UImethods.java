@@ -149,10 +149,8 @@ public class UImethods {
         String position = scanner.nextLine();
 
         if (position.equals("1")) {
-            
+            UI.RentalFilters();
         } else if (position.equals("2")) {
-            
-        } else if (position.equals("3")) {
             UI.ShowRentControl();
         } else {
             UI.PrintRentalTableIncorrectPosition();
