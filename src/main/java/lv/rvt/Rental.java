@@ -2,8 +2,6 @@ package lv.rvt;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
@@ -118,26 +116,40 @@ public class Rental {
     }
 
     private static void markCarAsRented(int carId, boolean available) throws Exception {
-        List<String> lines = Files.readAllLines(Paths.get("data/cars.csv"));
+    BufferedReader reader = Helper.getReader("cars.csv");
+    List<String> newLines = new ArrayList<>();
+    String line;
+    boolean isFirstLine = true;
 
-        List<String> newLines = new ArrayList<>();
-        newLines.add(lines.get(0));
-
-        for (int i = 1; i < lines.size(); i++) {
-            String line = lines.get(i);
-            String[] parts = line.split(", ");
-            int currentId = Integer.parseInt(parts[0].trim());
-
-            if (currentId == carId) {
-                newLines.add(line.replace(parts[8], String.valueOf(available)));
-            } else {
-                newLines.add(line);
-            }
+    while ((line = reader.readLine()) != null) {
+        if (isFirstLine) {
+            newLines.add(line);
+            isFirstLine = false;
+            continue;
         }
 
-        Files.write(Paths.get("data/cars.csv"), newLines, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
-        System.out.println("Automobiļa ID " + carId + " veiksmīgi atjaunināts");
+        String[] parts = line.split(", ");
+        int currentId = Integer.parseInt(parts[0].trim());
+
+        if (currentId == carId) {
+            parts[8] = String.valueOf(available);
+            newLines.add(String.join(", ", parts));
+        } else {
+            newLines.add(line);
+        }
     }
+
+    reader.close();
+
+    BufferedWriter writer = Helper.getWriter("cars.csv", StandardOpenOption.TRUNCATE_EXISTING);
+    for (int i = 0; i < newLines.size(); i++) {
+        writer.write(newLines.get(i));
+        writer.newLine();
+    }
+    writer.close();
+
+    System.out.println("Automobiļa ID " + carId + " veiksmīgi atjaunināts");
+}
 
     public static void returnCar() throws Exception {
         Scanner scanner = new Scanner(System.in);
@@ -168,26 +180,41 @@ public class Rental {
     }
 
     private static void updateRentalStatus(int rentalId) throws Exception {
-        List<String> lines = Files.readAllLines(Paths.get("data/rental.csv"));
-
+        BufferedReader reader = Helper.getReader("rental.csv");
         List<String> newLines = new ArrayList<>();
-        newLines.add(lines.get(0));
-
-        for (int i = 1; i < lines.size(); i++) {
-            String line = lines.get(i);
+        String line;
+        boolean isFirstLine = true;
+    
+        while ((line = reader.readLine()) != null) {
+            if (isFirstLine) {
+                newLines.add(line);
+                isFirstLine = false;
+                continue;
+            }
+    
             String[] parts = line.split(", ");
             int currentId = Integer.parseInt(parts[0].trim());
-
+    
             if (currentId == rentalId) {
-                newLines.add(line.replace(parts[6], String.valueOf(false)));
+                parts[6] = String.valueOf(false);
+                newLines.add(String.join(", ", parts));
             } else {
                 newLines.add(line);
             }
         }
-
-        Files.write(Paths.get("data/rental.csv"), newLines, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
+    
+        reader.close();
+    
+        BufferedWriter writer = Helper.getWriter("rental.csv", StandardOpenOption.TRUNCATE_EXISTING);
+        for (int i = 0; i < newLines.size(); i++) {
+            writer.write(newLines.get(i));
+            writer.newLine();
+        }
+        writer.close();
+    
         System.out.println("Noma ar ID " + rentalId + " veiksmīgi atjaunināta");
     }
+    
 
     public int getRentalId() {
         return rentalId;

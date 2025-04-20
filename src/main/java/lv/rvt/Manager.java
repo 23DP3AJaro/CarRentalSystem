@@ -1,8 +1,6 @@
 package lv.rvt;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
@@ -432,41 +430,51 @@ public static void editRental() throws Exception {
     System.out.println("Ievadiet iznomāšanas ID, kuru vēlaties rediģēt: ");
     int rentalId = Integer.parseInt(scanner.nextLine());
 
-    if (rentalId > getLastIdFromCsv("rental.csv")) {
-        System.out.println("Nepareizi iznomāšanas ID.");
-        return;
-    }
-    else if (rentalId < 0) {
+    if (rentalId > Manager.getLastIdFromCsv("rental.csv") || rentalId < 0) {
         System.out.println("Nepareizi iznomāšanas ID.");
         return;
     }
 
-    List<String> lines = Files.readAllLines(Paths.get("data/rental.csv"));
-    
+    BufferedReader reader = Helper.getReader("rental.csv");
+
     List<String> newLines = new ArrayList<>();
-    newLines.add(lines.get(0)); 
-    
-    
-    for (int i = 1; i < lines.size(); i++) {
-        String line = lines.get(i);
-        String[] parts = line.split(", ");
+    String line;
+    boolean isFirstLine = true;
+
+    while ((line = reader.readLine()) != null) {
+        if (isFirstLine) {
+            newLines.add(line); 
+            isFirstLine = false;
+            continue;
+        }
+
+        String[] parts = line.split(",\\s*");
         int currentId = Integer.parseInt(parts[0].trim());
-        
+
         if (currentId == rentalId) {
             if (parts[6].trim().equals("true")) {
                 System.out.println("Iznomāšana ar ID " + rentalId + " nav pieejama rediģēšanai.");
+                reader.close();
                 return;
             }
+
             System.out.println("Rediģē iznomāšanas ID: " + rentalId);
             String[] newParts = getUpdatedRentalData(parts, scanner);
             newLines.add(String.join(", ", newParts));
         } else {
             newLines.add(line);
-            
         }
     }
-    
-    Files.write(Paths.get("data/rental.csv"), newLines, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
+
+    reader.close();
+
+    BufferedWriter writer = Helper.getWriter("rental.csv", StandardOpenOption.TRUNCATE_EXISTING);
+    for (int i = 0; i < newLines.size(); i++) {
+        writer.write(newLines.get(i));
+        writer.newLine();
+    }
+    writer.close();
+
     System.out.println("Iznomāšana ar ID " + rentalId + " veiksmīgi atjaunota");
 }
 
