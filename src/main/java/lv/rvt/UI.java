@@ -52,8 +52,9 @@ public class UI {
         System.out.println("\n" + ANSI_YELLOW + "Sakums -> Statistika -> \n" + ANSI_RESET);
         System.out.println("1. Vidējais nobraukums");
         System.out.println("2. Kopēja peļņa");
-        System.out.println("3. Peļņa no viena mašīna");
-        System.out.println("4. Atpakaļ");
+        System.out.println("3. Vidējā nomas cena");
+        System.out.println("4. Maksimāla nomas cena");
+        System.out.println("5. Atpakaļ");
 
         UImethods.ChangePositionStatistics();
     }
@@ -64,8 +65,9 @@ public class UI {
         System.out.println("\n" + ANSI_YELLOW + "Sakums -> Statistika -> \n" + ANSI_RESET);
         System.out.println("1. Vidējais nobraukums");
         System.out.println("2. Kopēja peļņa");
-        System.out.println("3. Peļņa no viena mašīna");
-        System.out.println("4. Atpakaļ");
+        System.out.println("3. Vidējā nomas cena");
+        System.out.println("4. Maksimāla nomas cena");
+        System.out.println("5. Atpakaļ");
 
         System.out.println(ANSI_RED + "Nav tādu poziciju!" + ANSI_RESET);
         UImethods.ChangePositionStatistics();
@@ -435,7 +437,7 @@ public class UI {
                     "|");
         }
         System.out.println("\n" + "1. Atrast klientu");
-        System.out.println("2. Sakārtot");
+        System.out.println("2. Šķirot");
         System.out.println("3. Filtrēt");
         System.out.println("4. Atpakaļ");
 
@@ -471,7 +473,7 @@ public class UI {
                     "|");
         }
         System.out.println("\n" + "1. Atrast klientu");
-        System.out.println("2. Sakārtot");
+        System.out.println("2. Šķirot");
         System.out.println("3. Filtrēt");
         System.out.println("4. Atpakaļ");
 

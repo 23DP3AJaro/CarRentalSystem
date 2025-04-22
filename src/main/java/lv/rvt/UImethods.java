@@ -1,6 +1,7 @@
 package lv.rvt;
 
 import java.io.BufferedReader;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import lv.rvt.tools.Helper;
@@ -9,6 +10,53 @@ public class UImethods {
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    public static void PrintCsvTable(String csv) throws Exception {
+        final String ANSI_GREEN = "\u001B[32m";
+        final String ANSI_RESET = "\u001B[0m";
+
+        BufferedReader reader = Helper.getReader(csv);
+        String[] headers = reader.readLine().split(", ");
+        int[] maxLengths = new int[headers.length];
+
+        // Initialize maxLengths with header lengths
+        for (int i = 0; i < headers.length; i++) {
+            maxLengths[i] = headers[i].length();
+        }
+
+        // Read data and calculate max lengths for each column
+        String line;
+        StringBuilder dataBuilder = new StringBuilder();
+        while ((line = reader.readLine()) != null) {
+            String[] values = line.split(", ");
+            dataBuilder.append(line).append("\n");
+            for (int i = 0; i < values.length; i++) {
+                maxLengths[i] = Math.max(maxLengths[i], values[i].length());
+            }
+        }
+
+        // Print headers with proper spacing
+        for (int i = 0; i < headers.length; i++) {
+            System.out.printf(ANSI_GREEN + "%-" + (maxLengths[i] + 2) + "s" + ANSI_RESET, headers[i]);
+            if (i < headers.length - 1) {
+                System.out.print("|");
+            }
+        }
+        System.out.println();
+
+        // Print data rows with proper spacing
+        String[] rows = dataBuilder.toString().split("\n");
+        for (String row : rows) {
+            String[] values = row.split(", ");
+            for (int i = 0; i < values.length; i++) {
+                System.out.printf("%-" + (maxLengths[i] + 2) + "s", values[i]);
+                if (i < values.length - 1) {
+                    System.out.print("| ");
+                }
+            }
+            System.out.println();
+        }
     }
 
     public static void ChangePositionStatistics() throws Exception {
