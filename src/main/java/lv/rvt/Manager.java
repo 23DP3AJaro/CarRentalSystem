@@ -5,6 +5,7 @@ import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import lv.rvt.tools.Helper;
 
@@ -497,4 +498,59 @@ private static String[] getUpdatedRentalData(String[] oldParts, Scanner scanner)
     
     newParts[6] = oldParts[6].trim(); 
     return newParts;
-}}
+}
+
+public static void sortCarsByMileage() throws Exception {
+    BufferedReader reader = Helper.getReader("cars.csv");
+    List<String[]> carData = new ArrayList<>();
+    String header = reader.readLine();
+
+    String line;
+    while ((line = reader.readLine()) != null) {
+        String[] parts = line.split(", ");
+        carData.add(parts);
+    }
+    reader.close();
+
+    carData.sort(Comparator.comparingInt(parts -> Integer.parseInt(parts[6].trim())));
+
+    BufferedWriter writer = Helper.getWriter("sorted_cars.csv", StandardOpenOption.TRUNCATE_EXISTING);
+    writer.write(header);
+    writer.newLine();
+
+    for (int i = 0; i < carData.size(); i++) {
+        writer.write(String.join(", ", carData.get(i)));
+        writer.newLine();
+    }
+
+    writer.close();
+}
+
+
+
+public static void sortCarsByRentalPrice() throws Exception {
+    BufferedReader reader = Helper.getReader("cars.csv");
+    List<String[]> carData = new ArrayList<>();
+    String header = reader.readLine();
+
+    String line;
+    while ((line = reader.readLine()) != null) {
+        String[] parts = line.split(", ");
+        carData.add(parts);
+    }
+    reader.close();
+
+    carData.sort(Comparator.comparingDouble(parts -> Double.parseDouble(parts[7].trim())));
+
+    BufferedWriter writer = Helper.getWriter("sorted_cars.csv", StandardOpenOption.TRUNCATE_EXISTING);
+    writer.write(header);
+    writer.newLine();
+
+    for (int i = 0; i < carData.size(); i++) {
+        writer.write(String.join(", ", carData.get(i)));
+        writer.newLine();
+    }
+
+    writer.close();
+}
+}
