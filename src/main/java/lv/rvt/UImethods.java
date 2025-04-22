@@ -203,7 +203,7 @@ public class UImethods {
         } else if (position.equals("2")) {
 
         } else if (position.equals("3")) {
-
+            UI.PrintSortedCars();
         } else if (position.equals("4")) {
             UI.ShowCarControl();
             ChangePositionCarControl();

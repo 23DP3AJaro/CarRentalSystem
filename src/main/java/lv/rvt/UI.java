@@ -306,6 +306,106 @@ public class UI {
         
     }
 
+    public static void PrintSortedCars() throws Exception{
+        UImethods.clearScreen();
+        System.out.println("1. Šķirot pēc nobraukuma");
+        System.out.println("2. Šķirot pēc nomas cenas");
+        System.out.println("3. Atpakaļ");
+
+        final String ANSI_GREEN = "\u001B[32m";
+        final String ANSI_RESET = "\u001B[0m";
+        String position;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\nIevadiet poziciju:");
+        position = scanner.nextLine();
+
+        UImethods.clearScreen();
+
+        if (position.equals("1")) {
+            Manager.sortCarsByMileage();
+            
+            String line;
+            BufferedReader reader = Helper.getReader("sorted_cars.csv");
+            reader.readLine();
+
+            System.out.println(ANSI_GREEN);
+            System.out.printf("%-4s %-20s %-20s %-16s %-20s %-13s %-12s %-21s%n", "| ID", "| Zīmols", "| Modelis",
+                "| Ražošanas gads", "| Krāsa ", "| Numura zīme", "| Nobraukums", "| Nomas cena (€ diena)");
+            System.out.print(ANSI_RESET);
+
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(", ");
+
+                String id;
+                String brand;
+                String model;
+                String year;
+                String color;
+                String plate;
+                String milleage;
+                String price;
+                id = parts[0];
+                brand = parts[1];
+                model = parts[2];
+                year = parts[3];
+                color = parts[4];
+                plate = parts[5];
+                milleage = parts[6];
+                price = parts[7];
+
+                System.out.printf("%-4s %-20s %-20s %-16s %-20s %-13s %-12s %-21s%n", "| " + id, "| " + brand, "| " + model,
+                        "| " + year, "| " + color, "| " + plate, "| " + milleage, "| " + price);
+                }
+
+                System.out.println("\nENTER lai atgrieztos");
+                scanner.nextLine();
+                PrintCarsTable();
+        } else if (position.equals("2")) {
+            Manager.sortCarsByRentalPrice();
+
+            String line;
+            BufferedReader reader = Helper.getReader("sorted_cars.csv");
+            reader.readLine();
+
+            System.out.println(ANSI_GREEN);
+            System.out.printf("%-4s %-20s %-20s %-16s %-20s %-13s %-12s %-21s%n", "| ID", "| Zīmols", "| Modelis",
+                "| Ražošanas gads", "| Krāsa ", "| Numura zīme", "| Nobraukums", "| Nomas cena (€ diena)");
+            System.out.print(ANSI_RESET);
+
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(", ");
+            
+                String id;
+                String brand;
+                String model;
+                String year;
+                String color;
+                String plate;
+                String milleage;
+                String price;
+                id = parts[0];
+                brand = parts[1];
+                model = parts[2];
+                year = parts[3];
+                color = parts[4];
+                plate = parts[5];
+                milleage = parts[6];
+                price = parts[7];
+            
+                System.out.printf("%-4s %-20s %-20s %-16s %-20s %-13s %-12s %-21s%n", "| " + id, "| " + brand, "| " + model,
+                        "| " + year, "| " + color, "| " + plate, "| " + milleage, "| " + price);
+                }
+            
+                System.out.println("\nENTER lai atgrieztos");
+                scanner.nextLine();
+                PrintCarsTable();
+        } else if (position.equals("3")) {
+            PrintCarsTable();
+        } else {
+            PrintSortedCars();
+        }
+    }
+
     public static void PrintPersonTable() throws Exception {
         BufferedReader reader = Helper.getReader("klienti.csv");
         String line;
