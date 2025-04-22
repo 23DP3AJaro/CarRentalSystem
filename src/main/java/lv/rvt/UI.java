@@ -437,9 +437,8 @@ public class UI {
                     "|");
         }
         System.out.println("\n" + "1. Atrast klientu");
-        System.out.println("2. Šķirot");
-        System.out.println("3. Filtrēt");
-        System.out.println("4. Atpakaļ");
+        System.out.println("2. Filtrēt");
+        System.out.println("3. Atpakaļ");
 
         UImethods.ChangePositionPersonTable();
     }
@@ -473,9 +472,8 @@ public class UI {
                     "|");
         }
         System.out.println("\n" + "1. Atrast klientu");
-        System.out.println("2. Šķirot");
-        System.out.println("3. Filtrēt");
-        System.out.println("4. Atpakaļ");
+        System.out.println("2. Filtrēt");
+        System.out.println("3. Atpakaļ");
 
         System.out.println(ANSI_RED + "Nav tādu poziciju!" + ANSI_RESET);
         UImethods.ChangePositionPersonTable();
