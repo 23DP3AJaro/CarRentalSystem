@@ -43,4 +43,58 @@ public class Statistics {
         }
 
     }
+
+    public static void Income() throws Exception {
+        BufferedReader reader = Helper.getReader("rental.csv");
+        String line;
+        Double totalSum = 0.0;
+        reader.readLine();
+
+        while((line = reader.readLine()) != null){
+            String[] parts = line.split(", ");
+
+            totalSum = totalSum + Double.parseDouble(parts[5]);
+        }
+
+        System.out.println("Kopējā peļņa: " + totalSum + " EUR");
+    }
+
+    public static void AverageRentalPrice() throws Exception {
+        BufferedReader reader = Helper.getReader("cars.csv");
+        String line;
+        Double sum = 0.0;
+        Integer count = 0;
+        reader.readLine();
+
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(", ");
+            sum = sum + Double.parseDouble(parts[7]);
+            count = count + 1;
+        }
+
+        System.out.println("Vidējā nomas cena: " + sum / count + " EUR");
+    }
+
+    public static void maxPrice() throws Exception {
+        BufferedReader reader = Helper.getReader("cars.csv");
+        String line;
+        reader.readLine();
+        Double sum = 0.0;
+
+        for (int i = 0; i<1; i++) {
+            line = reader.readLine();
+            String[] parts = line.split(", ");
+            sum = Double.parseDouble(parts[7]);
+        }
+
+        while((line = reader.readLine()) != null){
+            String[] parts = line.split(", ");
+            
+            if (sum < Double.parseDouble(parts[7])) {
+                sum = Double.parseDouble(parts[7]);
+            }
+        }
+
+        System.out.println("Maksimālā nomas cena: " + sum + " EUR");
+    }
 };

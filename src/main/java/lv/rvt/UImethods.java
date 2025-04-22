@@ -24,10 +24,15 @@ public class UImethods {
             Statistics.AverageMilleage();
             ChangePositionStatistics();
         } else if (position.equals("2")) {
-
+            Statistics.Income();
+            ChangePositionStatistics();
         } else if (position.equals("3")) {
-
+            Statistics.AverageRentalPrice();
+            ChangePositionStatistics();
         } else if (position.equals("4")) {
+            Statistics.maxPrice();
+            ChangePositionStatistics();
+        } else if (position.equals("5")) {
             UI.MainMenu();
         } else {
             UI.ShowStatisticsIncorrectPosition();
