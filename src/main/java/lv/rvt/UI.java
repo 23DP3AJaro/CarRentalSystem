@@ -186,9 +186,8 @@ public class UI {
                     "| " + year, "| " + color, "| " + plate, "| " + milleage, "| " + price);
         }
         System.out.println("\n" + "1. Atrast mašīnu");
-        System.out.println("2. Filtrēt mašīnas");
-        System.out.println("3. Šķirot mašīnas");
-        System.out.println("4. Atpakaļ");
+        System.out.println("2. Šķirot mašīnas");
+        System.out.println("3. Atpakaļ");
 
         UImethods.ChangePositionCarTable();
     }
@@ -231,9 +230,8 @@ public class UI {
                     "| " + year, "| " + color, "| " + plate, "| " + milleage, "| " + price);
         }
         System.out.println("\n" + "1. Atrast mašīnu");
-        System.out.println("2. Filtrēt mašīnas");
-        System.out.println("3. Šķirot mašīnas");
-        System.out.println("4. Atpakaļ");
+        System.out.println("2. Šķirot mašīnas");
+        System.out.println("3. Atpakaļ");
 
         System.out.println(ANSI_RED + "Nav tādu poziciju!" + ANSI_RESET);
         UImethods.ChangePositionCarTable();
@@ -437,8 +435,7 @@ public class UI {
                     "|");
         }
         System.out.println("\n" + "1. Atrast klientu");
-        System.out.println("2. Filtrēt");
-        System.out.println("3. Atpakaļ");
+        System.out.println("2. Atpakaļ");
 
         UImethods.ChangePositionPersonTable();
     }

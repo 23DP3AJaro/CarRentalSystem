@@ -249,10 +249,8 @@ public class UImethods {
             UI.PrintCarsTableSearch();
             ChangePositionCarTable();
         } else if (position.equals("2")) {
-
-        } else if (position.equals("3")) {
             UI.PrintSortedCars();
-        } else if (position.equals("4")) {
+        } else if (position.equals("3")) {
             UI.ShowCarControl();
             ChangePositionCarControl();
         } else {
@@ -269,8 +267,6 @@ public class UImethods {
         if (position.equals("1")) {
             UI.PrintPersonTableSearch();
         } else if (position.equals("2")) {
-
-        } else if (position.equals("3")) {
             UI.ShowClientControl();
         } else {
             UI.PrintPersonTableIncorrectPosition();
