@@ -1,5 +1,7 @@
 id, brand, model, year_of_manufacture, color, license_plate, mileage, rental_price, available
-1, Toyota, Camry, 2020, Blue, ABC1234, 15000, 50.0, true
-3, Ford, Focus, 2018, Black, GHI9012, 30000, 45.0, true
-4, Chevrolet, Malibu, 2021, White, JKL3456, 10000, 60.0, true
-5, BMW, M%, 1943, Red, LV-2034, 203, 32.0, true
+1, Toyota, Camry, 2020, Blue, AB1234, 15000, 50, true
+2, Honda, Accord, 2019, Black, CD5678, 20000, 45, true
+3, Ford, Focus, 2021, White, EF9012, 10000, 55, true
+4, Chevrolet, Malibu, 2018, Red, GH3456, 30000, 40, false
+5, Nissan, Altima, 2022, Gray, IJ7890, 5000, 60, true
+6, Hyundai, Sonata, 2020, Silver, KL1234, 18000, 50, true

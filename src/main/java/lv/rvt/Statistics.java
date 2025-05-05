@@ -45,6 +45,10 @@ public class Statistics {
     }
 
     public static void Income() throws Exception {
+
+        final String ANSI_RESET = "\u001B[0m";
+        final String ANSI_RED = "\u001B[31m";
+        final String ANSI_GREEN = "\u001B[32m";
         BufferedReader reader = Helper.getReader("rental.csv");
         String line;
         Double totalSum = 0.0;
@@ -56,10 +60,13 @@ public class Statistics {
             totalSum = totalSum + Double.parseDouble(parts[5]);
         }
 
-        System.out.println("Kopējā peļņa: " + totalSum + " EUR");
+        System.out.println(ANSI_GREEN + "Kopējā peļņa: " + ANSI_RESET + totalSum + " EUR");
     }
 
     public static void AverageRentalPrice() throws Exception {
+        final String ANSI_RESET = "\u001B[0m";
+        final String ANSI_RED = "\u001B[31m";
+        final String ANSI_GREEN = "\u001B[32m";
         BufferedReader reader = Helper.getReader("cars.csv");
         String line;
         Double sum = 0.0;
@@ -72,10 +79,13 @@ public class Statistics {
             count = count + 1;
         }
 
-        System.out.println("Vidējā nomas cena: " + sum / count + " EUR");
+        System.out.println(ANSI_GREEN + "Vidējā nomas cena: " + ANSI_RESET + (sum / count) + " EUR");
     }
 
     public static void maxPrice() throws Exception {
+        final String ANSI_RESET = "\u001B[0m";
+        final String ANSI_RED = "\u001B[31m";
+        final String ANSI_GREEN = "\u001B[32m";
         BufferedReader reader = Helper.getReader("cars.csv");
         String line;
         reader.readLine();
@@ -95,6 +105,6 @@ public class Statistics {
             }
         }
 
-        System.out.println("Maksimālā nomas cena: " + sum + " EUR");
+        System.out.println(ANSI_GREEN + "Maksimālā nomas cena: " + ANSI_RESET + sum + " EUR" );
     }
 };
