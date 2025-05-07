@@ -147,8 +147,6 @@ public class Rental {
         writer.newLine();
     }
     writer.close();
-
-    System.out.println("Automobiļa ID " + carId + " veiksmīgi atjaunināts");
 }
 
     public static void returnCar() throws Exception {
@@ -157,7 +155,7 @@ public class Rental {
         String line;
         int carId = 0;
 
-        System.out.println("Ievadiet nomas ID: ");
+        System.out.println("\nIevadiet nomas ID: ");
         int rentalId = Integer.parseInt(scanner.nextLine());
 
         reader.readLine();
@@ -175,8 +173,6 @@ public class Rental {
         updateRentalStatus(rentalId);
 
         markCarAsRented(carId, true);
-
-        System.out.println("Automobilis veiksmīgi atgriezts!");
     }
 
     private static void updateRentalStatus(int rentalId) throws Exception {
@@ -211,8 +207,7 @@ public class Rental {
             writer.newLine();
         }
         writer.close();
-    
-        System.out.println("Noma ar ID " + rentalId + " veiksmīgi atjaunināta");
+
     }
     
 

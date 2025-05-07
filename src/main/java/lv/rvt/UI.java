@@ -571,7 +571,8 @@ public class UI {
         }
 
         System.out.println("\n"+"1. Filtrēt nomas");
-        System.out.println("2. Atpakaļ");
+        System.out.println("2. Deaktivizēt nomu");
+        System.out.println("3. Atpakaļ");
         UImethods.ChangePositionRentalTable();
     }
 
@@ -609,8 +610,9 @@ public class UI {
             System.out.printf("%-6s %-14s %-15s %-22s %-22s %-16s %-21s%n", "" + id, "| " + clientId, "| " + carId, "| " + startDate, "| " + endDate, "| " + totalPrice, "| " + status);
         }
 
-        System.out.println("\n" + "1. Filtrēt nomu");
-        System.out.println("2. Atpakaļ");
+        System.out.println("\n"+"1. Filtrēt nomas");
+        System.out.println("2. Deaktivizēt nomu");
+        System.out.println("3. Atpakaļ");
 
         System.out.println(ANSI_RED + "Nav tādu poziciju!" + ANSI_RESET);
         UImethods.ChangePositionRentalTable();
