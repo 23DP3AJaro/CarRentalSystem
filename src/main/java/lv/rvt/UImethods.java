@@ -195,6 +195,9 @@ public class UImethods {
     }
 
     public static void ChangePositionRentalTable() throws Exception {
+        final String ANSI_YELLOW = "\u001B[33m";
+        final String ANSI_RESET = "\u001B[0m";
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("\nIevadiet poziciju: ");
@@ -204,6 +207,11 @@ public class UImethods {
         if (position.equals("1")) {
             UI.RentalFilters();
         } else if (position.equals("2")) {
+            Rental.returnCar();
+            System.out.println(ANSI_YELLOW + "\nAutomobilis veiksmīgi atgriezts, noma vairs nav aktuāla!" + ANSI_RESET);
+            TimeUnit.SECONDS.sleep(5);
+            UI.ShowRentControl();
+        } else if (position.equals("3")) {
             UI.ShowRentControl();
         } else {
             UI.PrintRentalTableIncorrectPosition();
