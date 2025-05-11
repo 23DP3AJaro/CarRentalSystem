@@ -1,0 +1,3 @@
+id, brand, model, year_of_manufacture, color, license_plate, mileage, rental_price, available
+1, Toyota, Corolla, 2020, White, 1.8, Automatic, 30000, true
+2, Honda, Accord, 2019, Black, 2.0, Manual, 40000, true

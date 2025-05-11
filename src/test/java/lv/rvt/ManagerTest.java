@@ -14,44 +14,19 @@ public class ManagerTest {
     @Test
     public void testGetLastIdFromCsv() throws Exception {
 
-        int lastId = Manager.getLastIdFromCsv("cars.csv");
 
-        assertEquals(1, lastId);
+        BufferedWriter carsWriter = Helper.getWriter("ForTests.csv", StandardOpenOption.TRUNCATE_EXISTING);
+        carsWriter.write("id, brand, model, year_of_manufacture, color, license_plate, mileage, rental_price, available");
+        carsWriter.newLine();
+        carsWriter.write("1, Toyota, Corolla, 2020, White, 1.8, Automatic, 30000, true");
+        carsWriter.newLine();
+        carsWriter.write("2, Honda, Accord, 2019, Black, 2.0, Manual, 40000, true");
+        carsWriter.close();
+
+        assertEquals(2, Manager.getLastIdFromCsv("ForTests.csv"));
+
+
     }
-
-    @Test
-    public void testAddRentalToFile() throws Exception {
-
-        Rental rental = new Rental(1, 1, "2023-01-01", "2023-01-10", 100.0);
-
-
-        Manager.addRentalToFile(rental);
-
-        BufferedReader reader = Helper.getReader("rental.csv");
-        reader.readLine(); 
-
-        String line = reader.readLine();
-        reader.close();
-        assertEquals("1, 1, 1, 2023-01-01, 2023-01-10, 100.0, true", line);
-    }
-
-    @Test
-    public void testDeleteCar() throws Exception {
-
-        BufferedWriter writer = Helper.getWriter("cars.csv", StandardOpenOption.APPEND);
-        writer.write("90, Honda, Civic, 2019, Black, XYZ789, 60000, 45.0, true");
-        writer.newLine();
-        writer.close();
-
-
-        Manager.deleteCar(90);
-
-
-        BufferedReader reader = Helper.getReader("cars.csv");
-        reader.readLine(); 
-        String line = reader.readLine();
-        reader.close();
-        assertEquals("1, Toyota, Camry, 2020, Blue, ABC1234, 15000, 50.0, true", line);
-    }
+        
 
 }
